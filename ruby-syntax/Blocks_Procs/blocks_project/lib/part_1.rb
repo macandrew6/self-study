@@ -10,3 +10,22 @@ end
 def count_positive_subarrays (array)
   array.count {|sub_arr| sub_arr.sum > 0}
 end
+
+def aba_translate (string)
+  vowels = 'aeiou'
+  translated = ''
+
+  string.each_char do |letter|
+    if (vowels.include?(letter))
+      translated += letter + 'b' + letter
+    else
+      translated += letter
+    end
+  end
+
+  return translated
+end
+
+def aba_array (array)
+  array.map {|word| aba_translate(word)}
+end
