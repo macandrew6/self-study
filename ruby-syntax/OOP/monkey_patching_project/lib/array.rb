@@ -51,6 +51,28 @@ class Array
   end
 
   def my_uniq
+    uniqs = []
 
+    self.each do |el|
+      if !uniqs.include?(el)
+        uniqs << el
+      end
+    end
+
+    uniqs
+  end
+
+  def my_transpose
+    transposed = []
+
+    (0...self.length).each do |row|
+      new_row = []
+      (0...self.length).each do |col|
+        new_row << self[col][row]
+      end
+      transposed << new_row
+    end
+
+    transposed
   end
 end
