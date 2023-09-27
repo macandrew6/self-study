@@ -60,6 +60,38 @@ class Code
   end
 
   def num_near_matches(guess_code)
+    # counter = 0
 
+    # guess_code.pegs.each_with_index do |peg, i|
+    #   if self[i] != guess_code[i] && self.pegs.include?(guess_code[i])
+    #     counter += 1
+    #   end
+    # end
+
+    # counter
+
+    count = 0
+
+    (0...guess_code.length).each do |i|
+      if guess_code[i] != self[i] && self.pegs.include?(guess_code[i])
+        count += 1
+      end
+    end
+
+    count
+  end
+
+  def ==(other_code)
+    if other_code.length != self.length
+      return false
+    end
+
+    (0...self.length).each do |i|
+      if self[i] != other_code[i]
+        return false
+      end
+    end
+
+    return true
   end
 end
