@@ -59,6 +59,7 @@ class Code
     return count
   end
 
+  #something wrong here
   def num_near_matches(guess_code)
     # counter = 0
 
