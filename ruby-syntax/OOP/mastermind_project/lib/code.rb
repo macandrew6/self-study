@@ -60,25 +60,48 @@ class Code
   end
 
   #something wrong here
-  def num_near_matches(guess_code)
-    # counter = 0
+  # def num_near_matches(guess_code)
+  #   # counter = 0
 
-    # guess_code.pegs.each_with_index do |peg, i|
-    #   if self[i] != guess_code[i] && self.pegs.include?(guess_code[i])
-    #     counter += 1
-    #   end
-    # end
+  #   # guess_code.pegs.each_with_index do |peg, i|
+  #   #   if self[i] != guess_code[i] && self.pegs.include?(guess_code[i])
+  #   #     counter += 1
+  #   #   end
+  #   # end
 
-    # counter
+  #   # counter
 
-    count = 0
+  #   count = 0
 
-    (0...guess_code.length).each do |i|
-      if guess_code[i] != self[i] && self.pegs.include?(guess_code[i])
-        count += 1
+  #   (0...guess_code.length).each do |i|
+  #     if guess_code[i] != self[i] && self.pegs.include?(guess_code[i])
+  #       count += 1
+  #     end
+  #   end
+
+  #   count
+  # end
+
+    def num_near_matches(guess_code)
+    code_dup = self.pegs.dup
+    guess_dup = guess_code.pegs.dup
+
+    guess_dup.each_with_index do |peg, i|
+      if peg == code_dup[i]
+        code_dup[i] = nil
+        guess_dup[i] = nil
       end
     end
+    code_dup.delete(nil)
+    guess_dup.delete(nil)
 
+    count = 0
+    guess_dup.each_with_index do |peg, i|
+      if code_dup.include?(peg)
+        count += 1
+        code_dup.delete_at(code_dup.index(peg))
+      end
+    end
     count
   end
 
