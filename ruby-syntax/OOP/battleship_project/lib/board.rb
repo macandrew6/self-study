@@ -45,4 +45,20 @@ class Board
       return false
     end
   end
+
+  #sets 25% of grid to :S
+  def place_random_ships
+    ships = @size * 0.25
+
+    while ships != 0
+      rand_row = rand(@grid.length)
+      rand_col = rand(@grid.length)
+      rand_position = [rand_row, rand_col]
+
+      if self[rand_position] != :S
+        self[rand_position] = :S
+        ships -= 1
+      end
+    end
+  end
 end
