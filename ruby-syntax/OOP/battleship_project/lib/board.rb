@@ -87,4 +87,11 @@ class Board
     return hidden_grid
   end
 
+  def cheat
+    Board.print_grid(@grid)
+  end
+
+  def print
+    Board.print_grid(hidden_ships_grid)
+  end
 end
