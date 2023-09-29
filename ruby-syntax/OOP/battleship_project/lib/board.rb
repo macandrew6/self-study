@@ -1,6 +1,12 @@
 class Board
   attr_reader :size
 
+  def self.print_grid(grid)
+    grid.each do |row|
+      puts row.join(' ')
+    end
+  end
+
   def initialize(n)
     grid = Array.new(n) {Array.new(n)}
     (0...n).each do |row|
@@ -61,4 +67,24 @@ class Board
       end
     end
   end
+
+  def hidden_ships_grid
+    hidden_grid = Array.new(@grid.length) {Array.new(@grid.length)}
+
+    (0...@grid.length).each do |row|
+      (0...@grid.length).each do |col|
+        position = [row, col]
+        if self[position] == :S
+          hidden_grid[row][col] = :N
+        elsif self[position] == :X
+          hidden_grid[row][col] = :X
+        else
+          hidden_grid[row][col] = :N
+        end
+      end
+    end
+    
+    return hidden_grid
+  end
+
 end
