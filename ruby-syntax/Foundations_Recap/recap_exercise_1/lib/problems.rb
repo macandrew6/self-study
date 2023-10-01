@@ -61,16 +61,6 @@ end
 # find_bigrams("the theater is empty", ["cy", "em", "ty", "ea", "oo"])  # => ["em", "ty", "ea"]
 # find_bigrams("to the moon and back", ["ck", "oo", "ha", "at"])        # => ["ck", "oo"]
 def find_bigrams(str, bigrams)
-    all_bigrams = []
-    found_bigrams = []
-    
-    i = 0
-    while i < str.length - 1
-        bigram = str[i] + str[i+1]
-        all_bigrams << bigram
-        i += 1
-    end
-
     bigrams.select {|bigram| str.include?(bigram)}
 end
 
