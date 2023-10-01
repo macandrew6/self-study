@@ -6,8 +6,33 @@
 #
 # all_vowel_pairs(["goat", "action", "tear", "impromptu", "tired", "europe"])   # => ["action europe", "tear impromptu"]
 def all_vowel_pairs(words)
+    # initiate pairs array <- result
+    # initiate vowels array 
+    # go through 2 words at a time <- double index
+    # once vowels array is empty
+        # pairs array << put the two words together joined with a space 
+    pairs_array = []
 
+    words.each_with_index do |word, i|
+        words.each_with_index do |word2, i2|
+            if i < i2
+                pair = word + ' ' + word2 
+                if contains_all_vowels?(pair)
+                    pairs_array << pair
+                end
+            end
+        end
+    end
+
+    return pairs_array
 end
+
+def contains_all_vowels?(pair)
+    vowels = 'aeiou'
+    vowels.split('').all? {|char| pair.include?(char)}
+end
+
+
 
 
 # Write a method, composite?, that takes in a number and returns a boolean indicating if the number
@@ -18,7 +43,7 @@ end
 # composite?(9)     # => true
 # composite?(13)    # => false
 def composite?(num)
-
+    
 end
 
 
