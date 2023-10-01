@@ -43,7 +43,11 @@ end
 # composite?(9)     # => true
 # composite?(13)    # => false
 def composite?(num)
+    (2...num).each do |n|
+        return true if num % n == 0
+    end
     
+    false
 end
 
 
@@ -57,7 +61,17 @@ end
 # find_bigrams("the theater is empty", ["cy", "em", "ty", "ea", "oo"])  # => ["em", "ty", "ea"]
 # find_bigrams("to the moon and back", ["ck", "oo", "ha", "at"])        # => ["ck", "oo"]
 def find_bigrams(str, bigrams)
+    all_bigrams = []
+    found_bigrams = []
+    
+    i = 0
+    while i < str.length - 1
+        bigram = str[i] + str[i+1]
+        all_bigrams << bigram
+        i += 1
+    end
 
+    bigrams.select {|bigram| str.include?(bigram)}
 end
 
 class Hash
@@ -75,7 +89,14 @@ class Hash
     # hash_2.my_select { |k, v| k + 1 == v }      # => {10=>11, 5=>6, 7=>8})
     # hash_2.my_select                            # => {4=>4}
     def my_select(&prc)
-
+        hash = Hash.new
+        prc ||= Proc.new {|k| hash[k] = k}
+        self.each do |k, v|
+            if self[k] == true
+                hash[k] = v
+            end
+        end
+        prc.call(hash)
     end
 end
 
