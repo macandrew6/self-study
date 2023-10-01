@@ -79,14 +79,16 @@ class Hash
     # hash_2.my_select { |k, v| k + 1 == v }      # => {10=>11, 5=>6, 7=>8})
     # hash_2.my_select                            # => {4=>4}
     def my_select(&prc)
-        hash = Hash.new
-        prc ||= Proc.new {|k| hash[k] = k}
+        prc ||= Proc.new {|k, v| k == v}
+        hash = {}
+        
         self.each do |k, v|
-            if self[k] == true
+            if prc.call(k, v) == true
                 hash[k] = v
             end
         end
-        prc.call(hash)
+
+        hash
     end
 end
 
@@ -100,7 +102,20 @@ class String
     # "cats".substrings     # => ["c", "ca", "cat", "cats", "a", "at", "ats", "t", "ts", "s"]
     # "cats".substrings(2)  # => ["ca", "at", "ts"]
     def substrings(length = nil)
+        s_strings = []
+        
+        (0...self.length).each do |start_idx|
+            (start_idx...self.length).each do |end_idx|
+                substring = self[start_idx..end_idx]
+                s_strings << substring 
+            end
+        end
 
+        if length
+            s_strings.select {|substring| substring.length == length}
+        else
+            s_strings
+        end
     end
 
 
@@ -114,6 +129,15 @@ class String
     # "bootcamp".caesar_cipher(2) #=> "dqqvecor"
     # "zebra".caesar_cipher(4)    #=> "difve"
     def caesar_cipher(num)
+        ciphered = ''
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
+        self.each_char do |char|
+            new_idx = (alphabet.index(char) + num) % 26
+            new_char = alphabet[new_idx]
+            ciphered += new_char
+        end
+
+        ciphered
     end
 end
