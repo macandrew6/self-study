@@ -183,8 +183,96 @@ def vowel_idxs(string)
   (0...string.length).select {|i| vowels.include?(string[i])}
 end
 
-p vowel_rotate('computer')      # => "cempotur"
-p vowel_rotate('oranges')       # => "erongas"
-p vowel_rotate('headphones')    # => "heedphanos"
-p vowel_rotate('bootcamp')      # => "baotcomp"
-p vowel_rotate('awesome')       # => "ewasemo"
+# p vowel_rotate('computer')      # => "cempotur"
+# p vowel_rotate('oranges')       # => "erongas"
+# p vowel_rotate('headphones')    # => "heedphanos"
+# p vowel_rotate('bootcamp')      # => "baotcomp"
+# p vowel_rotate('awesome')       # => "ewasemo"
+
+
+### PROC PROBLEMS ###
+
+# String#select
+# Extend the string class by defining a String#select method that accepts a block. 
+# The method should return a new string containing characters of the original string 
+# that return true when passed into the block. If no block is passed, then return 
+# the empty string. Do not use the built-in Array#select in your solution.
+
+class String
+  def select(&prc)
+    prc ||= Proc.new {return ''}
+    new_str = ''
+
+    self.each_char do |char|
+      if prc.call(char) == true
+        new_str += char
+      end
+    end
+
+    new_str
+  end
+  
+  # p "app academy".select { |ch| !"aeiou".include?(ch) }   # => "pp cdmy"
+  # p "HELLOworld".select { |ch| ch == ch.upcase }          # => "HELLO"
+  # p "HELLOworld".select { |ch| ch == ch.downcase }          # => "HELLO"
+  # p "HELLOworld".select          # => ""
+
+  
+  # String#map!
+  # Extend the string class by defining a String#map! method that accepts a block. 
+  # The method should modify the existing string by replacing every character with 
+  # the result of calling the block, passing in the original character and it's index. 
+  # Do not use the built-in Array#map or Array#map! in your solution.
+
+  def map!(&prc)
+    self.each_char.with_index do |char, i|
+        self[i] = prc.call(char, i)
+    end
+    
+    self
+  end
+
+  # word_1 = "Lovelace"
+  # word_1.map! do |ch| 
+  #     if ch == 'e'
+  #         '3'
+  #     elsif ch == 'a'
+  #         '4'
+  #     else
+  #         ch
+  #     end
+  # end
+  # p word_1        # => "Lov3l4c3"
+  
+  # word_2 = "Dijkstra"
+  # word_2.map! do |ch, i|
+  #     if i.even?
+  #         ch.upcase
+  #     else
+  #         ch.downcase
+  #     end
+  # end
+  # p word_2        # => "DiJkStRa"
+end
+
+
+### RECURSION PRONLEMS ###
+
+# multiply
+# Write a method multiply(a, b) that takes in two numbers and returns their product.
+
+# You must solve this recursively (no loops!)
+# You must not use the multiplication (*) operator
+
+def multiply(a, b)
+
+end
+
+p multiply(3, 5)        # => 15
+p multiply(5, 3)        # => 15
+p multiply(2, 4)        # => 8
+p multiply(0, 10)       # => 0
+p multiply(-3, -6)      # => 18
+p multiply(3, -6)       # => -18
+p multiply(-3, 6)       # => -18
+
