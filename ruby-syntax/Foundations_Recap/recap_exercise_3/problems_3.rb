@@ -164,8 +164,23 @@ end
 # in the original string. The first vowel of the string should be replaced with the 
 # last vowel.
 
-def vowel_rotate
-  
+def vowel_rotate(string)
+  vowel_indicies = vowel_idxs(string)
+  new_vowel_indicies = vowel_indicies.rotate(-1)
+  new_string = string[0..-1]
+
+  (0...vowel_indicies.length).each do |i|
+    new_vowel = string[new_vowel_indicies[i]]
+    new_string[vowel_indicies[i]] = new_vowel
+  end
+
+  new_string
+end
+
+def vowel_idxs(string)
+  vowels = 'aeiou'
+
+  (0...string.length).select {|i| vowels.include?(string[i])}
 end
 
 p vowel_rotate('computer')      # => "cempotur"
