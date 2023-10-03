@@ -60,22 +60,7 @@ end
 # are any ties, return the streak that occurs later in the string.
 
 def longest_streak(str)
-  curr = '' 
-  longest = '' 
-
-  (0...str.length).each do |i|
-    if str[i] == str[i - 1] || i == 0
-      curr += str[i]
-    else 
-      curr = str[i] # resets curr
-    end
-
-    if curr.length >= longest.length
-      longest = curr
-    end
-  end
-
-  longest
+  p 'need to rework this solution'
 end
 
 p longest_streak('a')           # => 'a'
@@ -83,3 +68,37 @@ p longest_streak('accccbbb')    # => 'cccc'
 p longest_streak('aaaxyyyyyzz') # => 'yyyyy
 p longest_streak('aaabbb')      # => 'bbb'
 p longest_streak('abc')         # => 'c'
+
+
+
+# bi_prime?
+# Write a method bi_prime?(num) that accepts a number as an arg and returns a boolean 
+# indicating whether or not the number is a bi-prime. A bi-prime is a positive 
+# integer that can be obtained by multiplying two prime numbers.
+
+# For Example:
+
+# 14 is a bi-prime because 2 * 7
+# 22 is a bi-prime because 2 * 11
+# 25 is a bi-prime because 5 * 5
+# 24 is not a bi-prime because no two prime numbers have a product of 24
+
+def bi_prime?(num)
+  (2...num).each do |n|
+    (2...num).each do |m|
+      return true if is_prime?(n) && is_prime?(m) && n * m == num
+    end
+  end
+  return false
+end
+
+def is_prime?(num)
+  (2...num).none? {|n| num % n == 0}
+end
+
+p bi_prime?(14)   # => true
+p bi_prime?(22)   # => true
+p bi_prime?(25)   # => true
+p bi_prime?(94)   # => true
+p bi_prime?(24)   # => false
+p bi_prime?(64)   # => false
