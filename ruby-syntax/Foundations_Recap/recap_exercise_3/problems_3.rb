@@ -60,14 +60,29 @@ end
 # are any ties, return the streak that occurs later in the string.
 
 def longest_streak(str)
-  p 'need to rework this solution'
+  longest = ''
+  current = ''
+
+  (0...str.length).each do |i|
+    if str[i] == str[i - 1] || i == 0
+      current += str[i]
+    else
+      current = str[i]
+    end
+
+    if current.length >= longest.length
+      longest = current
+    end
+  end
+
+  longest
 end
 
-p longest_streak('a')           # => 'a'
-p longest_streak('accccbbb')    # => 'cccc'
-p longest_streak('aaaxyyyyyzz') # => 'yyyyy
-p longest_streak('aaabbb')      # => 'bbb'
-p longest_streak('abc')         # => 'c'
+# p longest_streak('a')           # => 'a'
+# p longest_streak('accccbbb')    # => 'cccc'
+# p longest_streak('aaaxyyyyyzz') # => 'yyyyy
+# p longest_streak('aaabbb')      # => 'bbb'
+# p longest_streak('abc')         # => 'c'
 
 
 
