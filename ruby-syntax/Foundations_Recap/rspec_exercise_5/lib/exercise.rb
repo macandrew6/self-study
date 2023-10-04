@@ -62,3 +62,19 @@ end
 # p maximum(['andy', 'jeremy', 'kristen']) {|el| el.length}
 # p maximum([5, 20, 105, 90]) {|el| el + 90}
 
+
+def my_group_by(array, &prc)
+  hash = Hash.new {|h, k| h[k] = Array.new}
+
+  array.each do |el|
+    hash[prc.call(el)] << el
+  end
+
+  hash
+end
+
+test1 = ['mouse', 'dog', 'goat', 'bird', 'cat']
+test2 = [1, 2, 9, 30, 11, 38]
+
+p my_group_by(test1) {|str| str.length}
+p my_group_by(test2) {|n| n % 2}
