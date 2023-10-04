@@ -41,5 +41,24 @@ a1 = ['a', 'b', 'c']
 a2 = [1]
 a3 = ['w', 'x', 'y', 'b', 'c']
 # p zany_zip(a1, a2, a3)
-p zany_zip(a1, a2)
-p zany_zip(a3)
+# p zany_zip(a1, a2)
+# p zany_zip(a3)
+
+
+def maximum(array, &prc)
+  max = 0
+  curr = nil
+
+  array.each do |el|
+    if prc.call(el) >= max
+      max = prc.call(el)
+      curr = el
+    end
+  end
+
+  curr
+end
+
+# p maximum(['andy', 'jeremy', 'kristen']) {|el| el.length}
+# p maximum([5, 20, 105, 90]) {|el| el + 90}
+
