@@ -324,11 +324,11 @@ end
 # should contain only prime numbers that multiply together to the given num. The 
 # array returned should contain numbers in ascending order. Do this recursively.
 
-def prime_factorization(num)
-  (2...num).each do |fact|
+def prime_factorization(num) # 6
+  (2...num).each do |fact| # 2
     if num % fact == 0
-      other_fact = num / fact
-      return [*prime_factorization(fact), *prime_factorization(other_fact)]
+      other_fact = num / fact # 3
+      return [*prime_factorization(fact), *prime_factorization(other_fact)] #[2, 2, 3]
     end
   end
 
