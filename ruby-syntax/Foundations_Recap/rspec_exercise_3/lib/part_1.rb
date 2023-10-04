@@ -6,7 +6,7 @@ end
 def nth_prime(n)
   num = 1
   count = 0
-  
+
   while count < n
     num += 1
     if is_prime?(num)
@@ -15,4 +15,8 @@ def nth_prime(n)
   end
 
   num
+end
+
+def prime_range(min, max)
+  (min..max).select {|n| is_prime?(n)}
 end
