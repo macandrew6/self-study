@@ -423,20 +423,18 @@ end
 # accepts a number, n, as an argument and returns the n-th Mersenne prime.
 
 def mersenne_prime(n)
-  prime_arr = []
-  i = 2
-  while prime_arr.length < n
-    candidate = (2 ** i) - 1
-    if is_prime?(candidate)
-      prime_arr << candidate
-    end
-    p prime_arr
-    i += 1
+  count = 0
+  x = 0
+  while count < n
+    x += 1
+    candidate = (2 ** x) - 1
+    count += 1 if is_prime?(candidate)
   end
-  prime_arr.last
+  candidate
 end
 
 def is_prime?(n)
+  return false if n < 2
   (2...n).none? {|i| n % i == 0}
 end
 
