@@ -58,12 +58,10 @@ def rampant_repeats(str, hash)
   
   str.each_char do |char|
     if hash.has_key?(char)
-      hash[char].times do 
-        new_str += char
-      end
-      next
+      new_str += char * hash[char]
+    else
+      new_str += char
     end
-    new_str += char
   end
 
   new_str
@@ -83,10 +81,7 @@ end
 # 35 is not a perfect square.
 
 def perfect_square?(num)
-  (0..num/2).each do |n|
-    return true if n * n == num
-  end
-  false
+  (1..num).any? {|n| n * n == num}
 end
 
 # p perfect_square?(1)     # true
@@ -108,30 +103,24 @@ end
 # are also known as highly composite numbers.
 
 def anti_prime?(num)
-  max_divisors = divisors(num).length
-  num.downto(1).each do |n|
-    curr_divisors = divisors(n).length
-    if curr_divisors > max_divisors
-      return false
-    end
-  end
-  true
+  max_divisors = count_divisors(num)
+  (0...num).all? {|n| count_divisors(n) < max_divisors}
 end
 
-def divisors(num)
-  (1..num).select {|n| num % n == 0}
+def count_divisors(num)
+  (1..num).count {|n| num % n == 0}
 end
 
-# p anti_prime?(24)   # true
-# p anti_prime?(36)   # true
-# p anti_prime?(48)   # true
-# p anti_prime?(360)  # true
-# p anti_prime?(1260) # true
-# p anti_prime?(27)   # false
-# p anti_prime?(5)    # false
-# p anti_prime?(100)  # false
-# p anti_prime?(136)  # false
-# p anti_prime?(1024) # false
+p anti_prime?(24)   # true
+p anti_prime?(36)   # true
+p anti_prime?(48)   # true
+p anti_prime?(360)  # true
+p anti_prime?(1260) # true
+p anti_prime?(27)   # false
+p anti_prime?(5)    # false
+p anti_prime?(100)  # false
+p anti_prime?(136)  # false
+p anti_prime?(1024) # false
 
 
 # matrix_addition
@@ -173,13 +162,13 @@ def mutual_factors(*nums)
     nums.each do |m|
       divisors = divisors(m)
       if m % n == 0
-        
+
       end
     end
   end
 end
 
-p mutual_factors(50, 30)            # [1, 2, 5, 10]
+# p mutual_factors(50, 30)            # [1, 2, 5, 10]
 # p mutual_factors(50, 30, 45, 105)   # [1, 5]
 # p mutual_factors(8, 4)              # [1, 2, 4]
 # p mutual_factors(8, 4, 10)          # [1, 2]
@@ -205,11 +194,11 @@ def tribonacci_number(num)
 
 end
 
-p tribonacci_number(1)  # 1
-p tribonacci_number(2)  # 1
-p tribonacci_number(3)  # 2
-p tribonacci_number(4)  # 4
-p tribonacci_number(5)  # 7
-p tribonacci_number(6)  # 13
-p tribonacci_number(7)  # 24
-p tribonacci_number(11) # 274
+# p tribonacci_number(1)  # 1
+# p tribonacci_number(2)  # 1
+# p tribonacci_number(3)  # 2
+# p tribonacci_number(4)  # 4
+# p tribonacci_number(5)  # 7
+# p tribonacci_number(6)  # 13
+# p tribonacci_number(7)  # 24
+# p tribonacci_number(11) # 274
