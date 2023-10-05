@@ -327,31 +327,31 @@ def squaragonal?(array)
   return false
 end
 
-p squaragonal?([
-    [:x, :y, :o],
-    [:x, :x, :x],
-    [:o, :o, :x],
-]) # true
+# p squaragonal?([
+#     [:x, :y, :o],
+#     [:x, :x, :x],
+#     [:o, :o, :x],
+# ]) # true
 
-p squaragonal?([
-    [:x, :y, :o],
-    [:x, :o, :x],
-    [:o, :o, :x],
-]) # true
+# p squaragonal?([
+#     [:x, :y, :o],
+#     [:x, :o, :x],
+#     [:o, :o, :x],
+# ]) # true
 
-p squaragonal?([
-    [1, 2, 2, 7],
-    [1, 1, 6, 7],
-    [0, 5, 1, 7],
-    [4, 2, 9, 1],
-]) # true
+# p squaragonal?([
+#     [1, 2, 2, 7],
+#     [1, 1, 6, 7],
+#     [0, 5, 1, 7],
+#     [4, 2, 9, 1],
+# ]) # true
 
-p squaragonal?([
-    [1, 2, 2, 5],
-    [1, 6, 5, 0],
-    [0, 2, 2, 7],
-    [5, 2, 9, 7],
-]) # false
+# p squaragonal?([
+#     [1, 2, 2, 5],
+#     [1, 6, 5, 0],
+#     [0, 2, 2, 7],
+#     [5, 2, 9, 7],
+# ]) # false
 
 
 # pascals_triangle
@@ -391,22 +391,57 @@ def pascals_triangle(n)
   pyramid
 end
 
-p pascals_triangle(5)
-# [
-#     [1],
-#     [1, 1],
-#     [1, 2, 1],
-#     [1, 3, 3, 1],
-#     [1, 4, 6, 4, 1]
-# ]
+# p pascals_triangle(5)
+# # [
+# #     [1],
+# #     [1, 1],
+# #     [1, 2, 1],
+# #     [1, 3, 3, 1],
+# #     [1, 4, 6, 4, 1]
+# # ]
 
-p pascals_triangle(7)
-# [
-#     [1],
-#     [1, 1],
-#     [1, 2, 1],
-#     [1, 3, 3, 1],
-#     [1, 4, 6, 4, 1],
-#     [1, 5, 10, 10, 5, 1],
-#     [1, 6, 15, 20, 15, 6, 1]
-# ]
+# p pascals_triangle(70)
+# # [
+# #     [1],
+# #     [1, 1],
+# #     [1, 2, 1],
+# #     [1, 3, 3, 1],
+# #     [1, 4, 6, 4, 1],
+# #     [1, 5, 10, 10, 5, 1],
+# #     [1, 6, 15, 20, 15, 6, 1]
+# # ]
+
+
+# mersenne_prime
+# A "Mersenne prime" is a prime number that is one less than a power of 2. This means 
+# that it is a prime number with the form 2^x - 1, where x is some exponent. For example:
+
+# 3 is a Mersenne prime because it is prime and 3 = 2^2 - 1
+# 7 is a Mersenne prime because it is prime and 7 = 2^3 - 1
+# 11 is not a Mersenne prime because although it is prime, it does not have the form 2^x - 1
+# The first three Mersenne primes are 3, 7, and 31. Write a method mersenne_prime that 
+# accepts a number, n, as an argument and returns the n-th Mersenne prime.
+
+def mersenne_prime(n)
+  prime_arr = []
+  i = 2
+  while prime_arr.length < n
+    candidate = (2 ** i) - 1
+    if is_prime?(candidate)
+      prime_arr << candidate
+    end
+    p prime_arr
+    i += 1
+  end
+  prime_arr.last
+end
+
+def is_prime?(n)
+  (2...n).none? {|i| n % i == 0}
+end
+
+p mersenne_prime(1) # 3
+p mersenne_prime(2) # 7
+p mersenne_prime(3) # 31
+p mersenne_prime(4) # 127
+p mersenne_prime(6) # 131071
