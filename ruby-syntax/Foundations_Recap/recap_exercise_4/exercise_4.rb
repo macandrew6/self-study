@@ -111,16 +111,16 @@ def count_divisors(num)
   (1..num).count {|n| num % n == 0}
 end
 
-p anti_prime?(24)   # true
-p anti_prime?(36)   # true
-p anti_prime?(48)   # true
-p anti_prime?(360)  # true
-p anti_prime?(1260) # true
-p anti_prime?(27)   # false
-p anti_prime?(5)    # false
-p anti_prime?(100)  # false
-p anti_prime?(136)  # false
-p anti_prime?(1024) # false
+# p anti_prime?(24)   # true
+# p anti_prime?(36)   # true
+# p anti_prime?(48)   # true
+# p anti_prime?(360)  # true
+# p anti_prime?(1260) # true
+# p anti_prime?(27)   # false
+# p anti_prime?(5)    # false
+# p anti_prime?(100)  # false
+# p anti_prime?(136)  # false
+# p anti_prime?(1024) # false
 
 
 # matrix_addition
@@ -157,15 +157,28 @@ matrix_e = [[0 , 0], [12, 4], [6,  3]]
 # can assume that all of the arguments are positive integers.
 
 def mutual_factors(*nums)
-  result = []
-  (0...nums.max).each do |n|
-    nums.each do |m|
-      divisors = divisors(m)
-      if m % n == 0
-
-      end
+  divisors = nums.map {|num| factors(num)}
+  # divisors.inject(:&)
+  longest = divisors.inject do |acc, cur|
+    if cur.length > acc.length
+      cur
+    else
+      acc
     end
   end
+
+  res = []
+  longest.each do |n|
+    if divisors.all? {|div| div.include?(n)}
+      res << n
+    end
+  end
+
+  res
+end
+
+def factors(num)
+  (1..num).select {|n| num % n == 0}
 end
 
 # p mutual_factors(50, 30)            # [1, 2, 5, 10]
