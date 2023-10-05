@@ -368,9 +368,27 @@ p squaragonal?([
 #   1 4 6 4 1
 # Write a method pascals_triangle that accepts a positive number, n, as an argument 
 # and returns a 2-dimensional array representing the first n levels of pascal's triangle.
+def adjacent_sum(arr)
+  sums = []
+  (0...arr.length - 1).each do |i|
+    sums << arr[i] + arr[i + 1]
+  end
+  sums
+end
 
 def pascals_triangle(n)
+  pyramid = [[1],[1, 1]]
 
+  while pyramid.length < n
+    last = pyramid.last
+    sub = []
+    sub << 1
+    sub += adjacent_sum(last)
+    sub << 1
+    pyramid << sub
+  end
+
+  pyramid
 end
 
 p pascals_triangle(5)
