@@ -76,5 +76,62 @@ end
 test1 = ['mouse', 'dog', 'goat', 'bird', 'cat']
 test2 = [1, 2, 9, 30, 11, 38]
 
-p my_group_by(test1) {|str| str.length}
-p my_group_by(test2) {|n| n % 2}
+# p my_group_by(test1) {|str| str.length}
+# p my_group_by(test2) {|n| n % 2}
+
+
+def max_tie_breaker(array, prc, &bloc)
+  max = array.first
+  
+  array.each do |el|
+    result_curr = bloc.call(el)
+    result_max = bloc.call(max)
+    if result_curr > result_max
+      max = el
+    elsif result_curr == result_max && prc.call(el) > prc.call(max)
+      max = el
+    end
+  end
+
+  max
+end
+
+length = Proc.new { |s| s.length }
+o_count = Proc.new { |s| s.count('o') }
+arr_1 = ['potato', 'swimming', 'cat']
+arr_2 = ['hamster', 'mushroom', 'swimming', 'kangaroo', 'cat']
+
+# p max_tie_breaker(arr_2, length, &o_count)
+
+
+def silly_syllables(sent)
+  new_sent = sent.split(' ').map do |word|
+    process_word(word)
+  end
+
+  new_sent.join(' ')
+end
+
+def process_word(word)
+  vowels = 'aeiou'
+  vowel_count = word.split('').count {|let| vowels.include?(let)}
+  return word if vowel_count < 2
+
+  indicies = first_last_vowel_indicies(word)
+  word[indicies.first..indicies.last]
+end
+
+def first_last_vowel_indicies(word)
+  vowels = 'aeiou'
+  indicies = []
+
+  (0...word.length).each do |i|
+    indicies << i if vowels.include?(word[i])
+  end
+
+  [indicies.first, indicies.last]
+end
+
+p process_word('properly')
+p first_last_vowel_indicies('properly')
+p silly_syllables('properly and precisely written code')
