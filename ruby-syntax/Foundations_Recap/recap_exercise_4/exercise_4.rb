@@ -251,9 +251,104 @@ matrix_d = [[2, -5], [7, 10], [0, 1]]
 matrix_e = [[0 , 0], [12, 4], [6,  3]]
 matrix_f = [[2 , 3], [7, 5], [4,  6]]
 
-p matrix_addition_reloaded(matrix_a, matrix_b)              # [[11, 6], [7, 7]]
-p matrix_addition_reloaded(matrix_a, matrix_b, matrix_c)    # [[10, 6], [7, 6]]
-p matrix_addition_reloaded(matrix_e)                        # [[0, 0], [12, 4], [6, 3]]
-p matrix_addition_reloaded(matrix_d, matrix_e)              # [[2, -5], [19, 14], [6, 4]]
-p matrix_addition_reloaded(matrix_a, matrix_b, matrix_e)    # nil
-p matrix_addition_reloaded(matrix_d, matrix_e, matrix_f)    # nil
+# p matrix_addition_reloaded(matrix_a, matrix_b)              # [[11, 6], [7, 7]]
+# p matrix_addition_reloaded(matrix_a, matrix_b, matrix_c)    # [[10, 6], [7, 6]]
+# p matrix_addition_reloaded(matrix_e)                        # [[0, 0], [12, 4], [6, 3]]
+# p matrix_addition_reloaded(matrix_d, matrix_e)              # [[2, -5], [19, 14], [6, 4]]
+# p matrix_addition_reloaded(matrix_a, matrix_b, matrix_e)    # nil
+# p matrix_addition_reloaded(matrix_d, matrix_e, matrix_f)    # nil
+
+
+# squarocol?
+# Write a method squarocol? that accepts a 2-dimensional array as an argument. The 
+# method should return a boolean indicating whether or not any row or column is 
+# completely filled with the same element. You may assume that the 2-dimensional 
+# array has "square" dimensions, meaning it's height is the same as it's width.
+
+def squarocol?(square)
+  return true if square.any? {|row| row.uniq.length == 1}
+  return true if square.transpose.any? {|col| col.uniq.length == 1}
+  false
+end
+
+# p squarocol?([
+#     [:a, :x , :d],
+#     [:b, :x , :e],
+#     [:c, :x , :f],
+# ]) # true
+
+# p squarocol?([
+#     [:x, :y, :x],
+#     [:x, :z, :x],
+#     [:o, :o, :o],
+# ]) # true
+
+# p squarocol?([
+#     [:o, :x , :o],
+#     [:x, :o , :x],
+#     [:o, :x , :o],
+# ]) # false
+
+# p squarocol?([
+#     [1, 2, 2, 7],
+#     [1, 6, 6, 7],
+#     [0, 5, 2, 7],
+#     [4, 2, 9, 7],
+# ]) # true
+
+# p squarocol?([
+#     [1, 2, 2, 7],
+#     [1, 6, 6, 0],
+#     [0, 5, 2, 7],
+#     [4, 2, 9, 7],
+# ]) # false
+
+
+# squaragonal?
+# Write a method squaragonal? that accepts 2-dimensional array as an argument. The 
+# method should return a boolean indicating whether or not the array contains all of 
+# the same element across either of its diagonals. You may assume that the 2-dimensional 
+# array has "square" dimensions, meaning it's height is the same as it's width.
+
+def squaragonal?(array)
+  # Check the main diagonal (from top-left to bottom-right)
+  main_diagonal_element = array[0][0]
+  return true if (0...array.length).all? do |i| 
+    array[i][i] == main_diagonal_element
+  end
+
+  # Check the secondary diagonal (from top-right to bottom-left)
+  secondary_diagonal_element = array[0][-1] #[0][2] => [1][1] => [2][0]
+  return true if (0...array.length).all? do |i|
+    array[array.length - 1 - i][0 + i] == secondary_diagonal_element
+  end
+
+  # If both diagonals don't have the same element, return false
+  return false
+end
+
+p squaragonal?([
+    [:x, :y, :o],
+    [:x, :x, :x],
+    [:o, :o, :x],
+]) # true
+
+p squaragonal?([
+    [:x, :y, :o],
+    [:x, :o, :x],
+    [:o, :o, :x],
+]) # true
+
+p squaragonal?([
+    [1, 2, 2, 7],
+    [1, 1, 6, 7],
+    [0, 5, 1, 7],
+    [4, 2, 9, 1],
+]) # true
+
+p squaragonal?([
+    [1, 2, 2, 5],
+    [1, 6, 5, 0],
+    [0, 2, 2, 7],
+    [5, 2, 9, 7],
+]) # false
