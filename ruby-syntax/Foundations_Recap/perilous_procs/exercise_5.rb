@@ -136,3 +136,52 @@ end
 # p every?(['squash', 'pea', 'kale', 'potato']) { |str| str[0] == 'p' }   # false
 # p every?(['parsnip', 'potato', 'pea']) { |str| str[0] == 'p' }          # true
 
+
+# at_most?
+# Write a method at_most? that accepts an array, a number (n), and a block as arguments. 
+# The method should return a boolean indicating whether no more than n elements of 
+# the array return true when given to the block. Solve this using Array#each.
+
+def at_most?(array, n, &prc)
+  count = 0
+
+  array.each do |el|
+    count += 1 if prc.call(el) == true
+  end
+
+  count <= n
+end
+
+# Examples
+
+# p at_most?([-4, 100, -3], 1) { |el| el > 0 }                         # true
+# p at_most?([-4, -100, -3], 1) { |el| el > 0 }                        # true
+# p at_most?([4, 100, -3], 1) { |el| el > 0 }                          # false
+# p at_most?([4, 100, 3], 1) { |el| el > 0 }                           # false
+# p at_most?(['r', 'q', 'e', 'z'], 2) { |el| 'aeiou'.include?(el) }    # true
+# p at_most?(['r', 'i', 'e', 'z'], 2) { |el| 'aeiou'.include?(el) }    # true
+# p at_most?(['r', 'i', 'e', 'o'], 2) { |el| 'aeiou'.include?(el) }    # false
+
+
+# first_index
+# Write a method first_index that accepts an array and a block as arguments. The 
+# method should return the index of the first element of the array that returns true 
+# when giben to the block. If no element of returns true, then the method should 
+#   return nil. Solve this using Array#each.
+
+def first_index(array, &prc)
+  array.each_with_index do |el, i|
+    return i if prc.call(el) == true
+  end
+
+  nil
+end
+
+# Examples
+
+# p first_index(['bit', 'cat', 'byte', 'below']) { |el| el.length > 3 }           # 2
+# p first_index(['bitten', 'bit', 'cat', 'byte', 'below']) { |el| el.length > 3 } # 0
+# p first_index(['bitten', 'bit', 'cat', 'byte', 'below']) { |el| el.length > 6 } # nil
+# p first_index(['bit', 'cat', 'byte', 'below']) { |el| el[0] == 'b' }            # 0
+# p first_index(['bit', 'cat', 'byte', 'below']) { |el| el.include?('a') }        # 1
+# p first_index(['bit', 'cat', 'byte', 'below']) { |el| el[0] == 't' }            # nil
