@@ -595,13 +595,11 @@ def next_prime(num, n)
     step = -(step)
   end
   
-  if n > 0
-    prime_counter = 0
-    while prime_counter < n
-      return nil if num < 0
-      num += step
-      prime_counter += 1 if is_prime?(num)
-    end
+  prime_counter = 0
+  while prime_counter < n
+    return nil if num < 0
+    num += step
+    prime_counter += 1 if is_prime?(num)
   end
 
   num
