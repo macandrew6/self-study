@@ -158,32 +158,16 @@ matrix_e = [[0 , 0], [12, 4], [6,  3]]
 
 def mutual_factors(*nums)
   divisors = nums.map {|num| factors(num)}
-  # divisors.inject(:&)
-  longest = divisors.inject do |acc, cur|
-    if cur.length > acc.length
-      cur
-    else
-      acc
-    end
-  end
-
-  res = []
-  longest.each do |n|
-    if divisors.all? {|div| div.include?(n)}
-      res << n
-    end
-  end
-
-  res
+  divisors.inject(:&)
 end
 
 def factors(num)
   (1..num).select {|n| num % n == 0}
 end
 
-# p mutual_factors(50, 30)            # [1, 2, 5, 10]
-# p mutual_factors(50, 30, 45, 105)   # [1, 5]
-# p mutual_factors(8, 4)              # [1, 2, 4]
+p mutual_factors(50, 30)            # [1, 2, 5, 10]
+p mutual_factors(50, 30, 45, 105)   # [1, 5]
+p mutual_factors(8, 4)              # [1, 2, 4]
 # p mutual_factors(8, 4, 10)          # [1, 2]
 # p mutual_factors(12, 24)            # [1, 2, 3, 4, 6, 12]
 # p mutual_factors(12, 24, 64)        # [1, 2, 4]
@@ -605,10 +589,10 @@ def next_prime(num, n)
   num
 end
 
-p pretentious_primes([4, 15, 7], 1)           # [5, 17, 11]
-p pretentious_primes([4, 15, 7], 2)           # [7, 19, 13]
-p pretentious_primes([12, 11, 14, 15, 7], 1)  # [13, 13, 17, 17, 11]
-p pretentious_primes([12, 11, 14, 15, 7], 3)  # [19, 19, 23, 23, 17]
+# p pretentious_primes([4, 15, 7], 1)           # [5, 17, 11]
+# p pretentious_primes([4, 15, 7], 2)           # [7, 19, 13]
+# p pretentious_primes([12, 11, 14, 15, 7], 1)  # [13, 13, 17, 17, 11]
+# p pretentious_primes([12, 11, 14, 15, 7], 3)  # [19, 19, 23, 23, 17]
 # p pretentious_primes([4, 15, 7], -1)          # [3, 13, 5]
 # p pretentious_primes([4, 15, 7], -2)          # [2, 11, 3]
 # p pretentious_primes([2, 11, 21], -1)         # [nil, 7, 19]
