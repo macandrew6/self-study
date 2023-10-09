@@ -284,7 +284,9 @@ end
 # Note that if words are capitalized in the original sentence, they should remain 
 # capitalized in the translated sentence. Vowels are the letters a, e, i, o, u.
 
-
+def reverberate(sent)
+  
+end
 
 # Examples
 
