@@ -285,8 +285,14 @@ end
 # capitalized in the translated sentence. Vowels are the letters a, e, i, o, u.
 
 def reverberate(sent)
-  
+
 end
+
+def t_ends_with_vowel (word, vowels)
+
+end
+
+def t_last_vowel (word, vowels)
 
 # Examples
 
