@@ -286,19 +286,45 @@ end
 
 def reverberate(sent)
   vowels = 'aeiou'
-end
+  words = sent.split(' ')
+  new_words = []
+  
+  # words.each do |word|
+  #   new_word = ''
+  #   if word.length < 3
+  #     new_word = word
+  #   elsif vowels.include?(word[-1])
+  #     new_word = word + word
+  #   else
+  #     new_word = t_last_vowel(word, vowels)
+  #   end
 
-def t_ends_with_vowel (word, vowels)
+  #   if word == word.capitalize
+  #     new_words << new_word.capitalize
+  #   else
+  #     new_words << new_word
+  #   end
+  # end
 
+  new_words = words.map do |word|
+    new_word = vowels.include?(word[-1]) && word.length > 2 ? word + word : t_last_vowel(word, vowels)
+    word.capitalize == word ? new_word.capitalize : new_word
+  end
+
+  new_words.join(' ')
 end
 
 def t_last_vowel (word, vowels)
-
+  (word.length - 1).downto(0) do |i|
+    if vowels.include?(word[i])
+      return word[0...i] + word[i..-1] + word[i..-1]
+    end
+  end
 end
 
 # Examples
 
-# p reverberate('We like to go running fast') # "We likelike to go runninging fastast"
-# p reverberate('He cannot find the trash') # "He cannotot findind thethe trashash"
-# p reverberate('Pasta is my favorite dish') # "Pastapasta is my favoritefavorite dishish"
-# p reverberate('Her family flew to France') # "Herer familyily flewew to Francefrance"
+p reverberate('We like to go running fast') # "We likelike to go runninging fastast"
+p reverberate('He cannot find the trash') # "He cannotot findind thethe trashash"
+p reverberate('Pasta is my favorite dish') # "Pastapasta is my favoritefavorite dishish"
+p reverberate('Her family flew to France') # "Herer familyily flewew to Francefrance"
