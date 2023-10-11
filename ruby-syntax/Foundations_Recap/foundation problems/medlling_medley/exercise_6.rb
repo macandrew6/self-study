@@ -211,11 +211,7 @@ end
 # true when passed into all of the given procs.
 
 def conjunct_select(array, *procs)
-  new_array = array.select do |el|
-    procs.all? {|prc| prc.call(el) == true}
-  end
-
-  new_array
+  array.select { |el| procs.all? {|prc| prc.call(el) == true} }
 end
 
 # Examples
@@ -287,44 +283,83 @@ end
 def reverberate(sent)
   vowels = 'aeiou'
   words = sent.split(' ')
-  new_words = []
-  
-  # words.each do |word|
-  #   new_word = ''
-  #   if word.length < 3
-  #     new_word = word
-  #   elsif vowels.include?(word[-1])
-  #     new_word = word + word
-  #   else
-  #     new_word = t_last_vowel(word, vowels)
-  #   end
-
-  #   if word == word.capitalize
-  #     new_words << new_word.capitalize
-  #   else
-  #     new_words << new_word
-  #   end
-  # end
 
   new_words = words.map do |word|
-    new_word = vowels.include?(word[-1]) && word.length > 2 ? word + word : t_last_vowel(word, vowels)
+    if word.length < 3
+      new_word = word
+    else
+      new_word = vowels.include?(word[-1]) ? word * 2 : transform_last_vowel_word(word, vowels)
+    end
+
     word.capitalize == word ? new_word.capitalize : new_word
   end
 
   new_words.join(' ')
 end
 
-def t_last_vowel (word, vowels)
+def transform_last_vowel_word (word, vowels)
   (word.length - 1).downto(0) do |i|
     if vowels.include?(word[i])
-      return word[0...i] + word[i..-1] + word[i..-1]
+      return word[0...i] + (word[i..-1] * 2)
     end
   end
 end
 
 # Examples
 
-p reverberate('We like to go running fast') # "We likelike to go runninging fastast"
-p reverberate('He cannot find the trash') # "He cannotot findind thethe trashash"
-p reverberate('Pasta is my favorite dish') # "Pastapasta is my favoritefavorite dishish"
-p reverberate('Her family flew to France') # "Herer familyily flewew to Francefrance"
+# p reverberate('We like to go running fast') # "We likelike to go runninging fastast"
+# p reverberate('He cannot find the trash') # "He cannotot findind thethe trashash"
+# p reverberate('Pasta is my favorite dish') # "Pastapasta is my favoritefavorite dishish"
+# p reverberate('Her family flew to France') # "Herer familyily flewew to Francefrance"
+
+
+# disjunct_select
+# Write a method disjunct_select that accepts an array and one or more procs as arguments. 
+# The method should return a new array containing the elements that return true when 
+# passed into at least one of the given procs.
+
+def disjunct_select(array, *prcs)
+  array.select {|el| prcs.any? { |prc| prc.call(el) }}
+end
+
+# Examples
+
+# longer_four = Proc.new { |s| s.length > 4 }
+# contains_o = Proc.new { |s| s.include?('o') }
+# starts_a = Proc.new { |s| s[0] == 'a' }
+
+# p disjunct_select(['ace', 'dog', 'apple', 'teeming', 'boot', 'zip'],
+#     longer_four,
+# ) # ["apple", "teeming"]
+
+# p disjunct_select(['ace', 'dog', 'apple', 'teeming', 'boot', 'zip'],
+#     longer_four,
+#     contains_o
+# ) # ["dog", "apple", "teeming", "boot"]
+
+# p disjunct_select(['ace', 'dog', 'apple', 'teeming', 'boot', 'zip'],
+#     longer_four,
+#     contains_o,
+#     starts_a
+# ) # ["ace", "dog", "apple", "teeming", "boot"]
+
+
+# alternating_vowel
+# Write a method alternating_vowel that accepts a sentence as an argument. The method 
+# should return a new sentence where the words alternate between having their first 
+# or last vowel removed. For example:
+
+# the 1st word should be missing its first vowel
+# the 2nd word should be missing its last vowel
+# the 3rd word should be missing its first vowel
+# the 4th word should be missing its last vowel
+# ... and so on
+# Note that words that contain no vowels should remain unchanged. Vowels are the letters 
+# a, e, i, o, u.
+
+# Examples
+
+p alternating_vowel('panthers are great animals') # "pnthers ar grat animls"
+p alternating_vowel('running panthers are epic') # "rnning panthrs re epc"
+p alternating_vowel('code properly please') # "cde proprly plase"
+p alternating_vowel('my forecast predicts rain today') # "my forecst prdicts ran tday"
