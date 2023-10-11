@@ -281,26 +281,25 @@ end
 # capitalized in the translated sentence. Vowels are the letters a, e, i, o, u.
 
 def reverberate(sent)
-  vowels = 'aeiou'
   words = sent.split(' ')
 
   new_words = words.map do |word|
-    if word.length < 3
-      new_word = word
-    else
-      new_word = vowels.include?(word[-1]) ? word * 2 : transform_last_vowel_word(word, vowels)
-    end
-
+    new_word = word.length > 2 ? transform_word(word) : word
     word.capitalize == word ? new_word.capitalize : new_word
   end
 
   new_words.join(' ')
 end
 
-def transform_last_vowel_word (word, vowels)
-  (word.length - 1).downto(0) do |i|
-    if vowels.include?(word[i])
-      return word[0...i] + (word[i..-1] * 2)
+def transform_word (word)
+  vowels = 'aeiou'
+  if vowels.include?(word[-1])
+    return word * 2
+  else
+    (word.length - 1).downto(0) do |i|
+      if vowels.include?(word[i])
+        return word[0...i] + (word[i..-1] * 2)
+      end
     end
   end
 end
@@ -357,9 +356,85 @@ end
 # Note that words that contain no vowels should remain unchanged. Vowels are the letters 
 # a, e, i, o, u.
 
+def alternating_vowel(sent)
+  vowels = 'aeiou'
+  words = sent.split(' ')
+
+  new_words = words.map.with_index do |word, i|
+    i.even? ? transform_first_vowel(word, vowels) : transform_last_vowel(word, vowels)
+  end
+
+  new_words.join(' ')
+end
+
+def transform_first_vowel(word, vowels)
+  (0...word.length).each do |i|
+    if vowels.include?(word[i])
+      return word[0...i] + word[i+1..-1] 
+    end
+  end
+  word
+end
+
+def transform_last_vowel(word, vowels)
+  (word.length-1).downto(0).each do |i|
+    if vowels.include?(word[i])
+      return word[0...i] + word[i+1..-1]
+    end
+  end
+  word
+end
+
 # Examples
 
-p alternating_vowel('panthers are great animals') # "pnthers ar grat animls"
-p alternating_vowel('running panthers are epic') # "rnning panthrs re epc"
-p alternating_vowel('code properly please') # "cde proprly plase"
-p alternating_vowel('my forecast predicts rain today') # "my forecst prdicts ran tday"
+# p alternating_vowel('panthers are great animals') # "pnthers ar grat animls"
+# p alternating_vowel('running panthers are epic') # "rnning panthrs re epc"
+# p alternating_vowel('code properly please') # "cde proprly plase"
+# p alternating_vowel('my forecast predicts rain today') # "my forecst prdicts ran tday"
+
+
+# silly_talk
+# Write a method silly_talk that accepts a sentence as an argument. The method should 
+# translate each word of the sentence according to the following rules:
+
+# if the word ends with a vowel, simply repeat that vowel at the end of the word 
+#   (example: 'code'->'codee')
+# if the word ends with a non-vowel, every vowel of the word should be followed by 'b' 
+#   and that same vowel (example: 'siren'->'sibireben')
+# Note that if words are capitalized in the original sentence, they should remain 
+# capitalized in the translated sentence. Vowels are the letters a, e, i, o, u.
+
+def silly_talk(sent)
+  words = sent.split(' ')
+
+  new_words = words.map do |word|
+    new_word = silly_transform(word)
+    word == word.capitalize ? new_word.capitalize : new_word
+  end
+
+  new_words.join(' ')
+end
+
+def silly_transform(word)
+  vowels = 'aeiou'
+  new_word = ''
+
+  return word + word[-1] if vowels.include?(word[-1])
+
+  word.each_char do |char|
+    if vowels.include?(char)
+      new_word += char + 'b' + char
+    else
+      new_word += char
+    end
+  end
+
+  new_word
+end
+
+# Examples
+
+# p silly_talk('Kids like cats and dogs') # "Kibids likee cabats aband dobogs"
+# p silly_talk('Stop that scooter') # "Stobop thabat scobooboteber"
+# p silly_talk('They can code') # "Thebey caban codee"
+# p silly_talk('He flew to Italy') # "Hee flebew too Ibitabaly"
