@@ -450,19 +450,16 @@ end
 
 def compress(string)
   count = 1
-  current_char = ''
   compressed_str = ''
 
   (0...string.length).each do |i|
     if string[i] == string[i + 1]
       count += 1
-      current_char = string[i]
     elsif (count == 1 && string[i] != string[i + 1])
       compressed_str += string[i]
     else
-      compressed_str += current_char + count.to_s
+      compressed_str += string[i] + count.to_s
       count = 1
-      current_char = string[i + 1]
     end
   end
 
