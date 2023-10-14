@@ -2,8 +2,6 @@ require './board'
 require './human_player'
 
 class Game
-  attr_reader :players
-
   def initialize(board_size, *player_marks)
     players = player_marks.map do |player_mark|
       Human_player.new(player_mark)
