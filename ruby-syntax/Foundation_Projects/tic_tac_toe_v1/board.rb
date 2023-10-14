@@ -73,14 +73,26 @@ class Board
     false
   end
 
+  def empty_positions?
+    @grid.any? do |row|
+      row.any? {|spot| spot == '_'}
+    end
+  end
 end
 
 
-board = Board.new
+# board = Board.new
 
-board.place_mark([0, 0], :X)
-board.place_mark([1, 1], :X)
-board.place_mark([2, 2], :X)
-board.print
-board.win_col?(:X)
-p board.win?(:X)
+# board.place_mark([0, 0], :X)
+# board.place_mark([0, 1], :X)
+# board.place_mark([0, 2], :X)
+# board.place_mark([1, 0], :X)
+# board.place_mark([1, 1], :X)
+# board.place_mark([1, 2], :X)
+# board.place_mark([2, 0], :X)
+# board.place_mark([2, 1], :X)
+# # board.place_mark([2, 2], :X)
+# board.print
+# board.win_col?(:X)
+# board.win?(:X)
+# p board.empty_positions?
