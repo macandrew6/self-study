@@ -1,10 +1,15 @@
 require './board'
 require './human_player'
+require './computer_player'
 
 class Game
-  def initialize(board_size, *player_marks)
-    players = player_marks.map do |player_mark|
-      Human_player.new(player_mark)
+  def initialize(board_size, player_marks)
+    players = player_marks.map do |player_mark, boolean|
+      if boolean == true
+        Computer_player.new(player_mark)
+      else
+        Human_player.new(player_mark)
+      end
     end
     @players = players
     @board = Board.new(board_size)
@@ -36,5 +41,6 @@ class Game
   end
 end
 
-game = Game.new(4, :X, :O, :C)
+game = Game.new(4, X: true, O: true, C: true)
+p game
 game.play
