@@ -20,7 +20,8 @@ class Game
   def play
     while @board.empty_positions?
       @board.print
-      position = @current_player.get_position
+      legal_positions = @board.legal_positions
+      position = @current_player.get_position(legal_positions)
       mark = @current_player.mark_value
       @board.place_mark(position, mark)
 

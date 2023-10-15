@@ -3,7 +3,7 @@ class Computer_player
     @mark_value = mark_value
   end
 
-  def get_position
+  def get_position(legal_positions)
     p "Player #{@mark_value} enter your position as two numbers with a space between them: ex.(`row col`) "
     position = gets.chomp
 

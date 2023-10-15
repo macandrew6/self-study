@@ -78,6 +78,16 @@ class Board
       row.any? {|spot| spot == '_'}
     end
   end
+
+  def legal_positions
+    positions = []
+    (0...@grid.length).each do |row|
+      (0...@grid.length).each do |col|
+        positions << [row, col] if @grid[row][col] == '_'
+      end
+    end
+    positions
+  end
 end
 
 
