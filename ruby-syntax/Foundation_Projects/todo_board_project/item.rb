@@ -1,4 +1,7 @@
 class Item 
+  attr_accessor :title, :description
+  attr_reader :deadline
+  
   def self.valid_date?(date_string)
     year, month, day = date_string.split('-')
     valid_years = ("1900".."3000").to_a
@@ -14,7 +17,14 @@ class Item
     @deadline = deadline
     @description = description
   end
+
+  def deadline=(new_deadline)
+    raise 'You have entered an invalid deadline' if !Item.valid_date?(new_deadline)
+    @deadline = new_deadline
+  end
 end
 
-item = Item.new('drive to pet store', '1352-12-20', 'clean the bird cages')
-p item
+# item = Item.new('drive to pet store', '1988-12-20', 'clean the bird cages')
+# p item.description
+# item.deadline = '2022-12-20'
+# p item
