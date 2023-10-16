@@ -42,5 +42,4 @@ class Game
 end
 
 game = Game.new(4, X: true, O: true, C: true)
-p game
 game.play
