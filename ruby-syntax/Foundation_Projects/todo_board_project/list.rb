@@ -2,6 +2,7 @@ require './item'
 
 class List
   attr_accessor :label
+
   def initialize(label)
     @label = label
     @items = []
@@ -44,6 +45,34 @@ class List
   def priority
     @items[0]
   end
+
+  def print
+    p Array.new(50){"-"}.join
+    p Array.new(22){"-"}.join + "#{self.label}" + Array.new(22){"-"}.join
+    p Array.new(50){"-"}.join
+    p "Index   | Item                        | Deadline  "
+    p Array.new(50){"-"}.join
+
+    @items.each_with_index do |item, i|
+      p "#{i.to_s.ljust(7)} | #{item.title.ljust(27)} | #{item.deadline}"
+    end
+
+    p Array.new(50){"-"}.join
+  end
+
+  def print_full_item(index)
+    if valid_index?(index)
+      item = @items[index]
+      p ("-").ljust(50, "-")
+      p "#{item.title.ljust(36)}  | #{item.deadline}"
+      p "#{item.description.ljust(50)}"
+      p ("-").ljust(50, "-")
+    end
+  end
+
+  def print_priority
+    print_full_item(0)
+  end
 end
 
 list = List.new('Chores')
@@ -54,3 +83,5 @@ p list.add_item('watch black bird4', '2020-11-06', 'description')
 p list.add_item('watch black bird5', '2020-12-06', 'description')
 p list.swap(-1, 3)
 p list.priority
+list.print
+list.print_priority
