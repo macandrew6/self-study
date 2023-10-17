@@ -16,8 +16,13 @@ class Item
     @title = title
     @deadline = deadline
     @description = description
+    @done = false
   end
 
+  def toggle
+    @done = !@done
+  end
+  
   def deadline=(new_deadline)
     raise 'You have entered an invalid deadline' if !Item.valid_date?(new_deadline)
     @deadline = new_deadline

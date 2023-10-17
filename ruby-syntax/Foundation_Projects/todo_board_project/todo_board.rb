@@ -30,7 +30,6 @@ class Todo_Board
       @list.down(index.to_i, amt.to_i)
     when 'swap'
       index_1, index_2 = *args
-      p *args
       @list.swap(index_1.to_i, index_2.to_i)
     when 'sort'
       @list.sort_by!
@@ -48,7 +47,7 @@ class Todo_Board
     else
       p 'sorry that command is not recognized'
     end
-    
+
     true
   end
 

@@ -46,6 +46,10 @@ class List
     @items[0]
   end
 
+  def toggle_item(index)
+    @items[index].toggle
+  end
+
   def print
     p Array.new(50){"-"}.join
     p Array.new(22){"-"}.join + "#{self.label}" + Array.new(22){"-"}.join
