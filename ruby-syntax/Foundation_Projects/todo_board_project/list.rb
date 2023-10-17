@@ -15,9 +15,23 @@ class List
       false
     end
   end
+
+  def size
+    @items.count
+  end
+
+  def valid_index?(index)
+    index < @items.length && index >= 0
+  end
+
+  def swap(index_1, index_2)
+    @items[index_1], @items[index_2] = @items[index_2], @index[index_1]
+  end
 end
 
 list = List.new('Chores')
 p list.add_item('watch black bird', '2023-12-03', 'description')
-p list.add_item('watch black bird', '2023-13-03', 'description')
+p list.add_item('watch black bird', '2022-06-03', 'description')
+p list.add_item('watch black bird', '2021-08-03', 'description')
+p list.add_item('watch black bird', '2020-11-06', 'description')
 p list
