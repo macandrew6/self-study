@@ -1,6 +1,6 @@
 class Item 
   attr_accessor :title, :description
-  attr_reader :deadline
+  attr_reader :deadline, :done
   
   def self.valid_date?(date_string)
     year, month, day = date_string.split('-')

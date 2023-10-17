@@ -10,6 +10,7 @@ class Todo_Board
     p 'Move a todo up with: up <index> <optional amount>'
     p 'Move a todo down with: down <index> <optional amount>'
     p 'Swap the position of todo with: swap <index_1> <index_2>'
+    p 'Toggle a items done with: toggle <index>'
     p 'Sort the todos in descending order with: sort'
     p 'Print the top priority with: priority'
     p 'Print specific todo with: print <optional index>'
@@ -42,6 +43,9 @@ class Todo_Board
       else
         @list.print
       end
+    when 'toggle'
+      index = args[0].to_i
+      @list.toggle_item(index)
     when 'quit'
       false
     else

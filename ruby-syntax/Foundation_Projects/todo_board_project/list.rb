@@ -50,27 +50,44 @@ class List
     @items[index].toggle
   end
 
+  def remove_item(index)
+    if valid_index?(index)
+      @items = @items[0...index] + @items[index+1..-1]
+      true
+    else
+      false
+    end
+  end
+
+  def purge
+    @items = @items.reject do |item, i|
+      item.done == true
+    end
+    @items
+  end
+
   def print
-    p Array.new(50){"-"}.join
-    p Array.new(22){"-"}.join + "#{self.label}" + Array.new(22){"-"}.join
-    p Array.new(50){"-"}.join
-    p "Index   | Item                        | Deadline  "
-    p Array.new(50){"-"}.join
+    p Array.new(70){"-"}.join
+    p Array.new(32){"-"}.join + "#{self.label}" + Array.new(32){"-"}.join
+    p Array.new(70){"-"}.join
+    p "Index   | Item                        | Deadline                      "
+    p Array.new(70){"-"}.join
 
     @items.each_with_index do |item, i|
-      p "#{i.to_s.ljust(7)} | #{item.title.ljust(27)} | #{item.deadline}"
+      p "#{i.to_s.ljust(7)} | #{item.title.ljust(27)} | #{item.deadline.ljust(20)} | #{item.done.to_s.ljust(7)}"
     end
 
-    p Array.new(50){"-"}.join
+    p Array.new(70){"-"}.join
   end
 
   def print_full_item(index)
     if valid_index?(index)
       item = @items[index]
-      p ("-").ljust(50, "-")
-      p "#{item.title.ljust(36)}  | #{item.deadline}"
-      p "#{item.description.ljust(50)}"
-      p ("-").ljust(50, "-")
+      p ("-").ljust(70, "-")
+      p "#{item.title.ljust(56)}  | #{item.deadline}"
+      p "#{item.description.ljust(70)}"
+      p "Done: #{item.done}"
+      p ("-").ljust(70, "-")
     end
   end
 
@@ -108,15 +125,17 @@ class List
   end
 end
 
-# list = List.new('Chores')
-# p list.add_item('watch black bird1', '2023-12-03', 'description')
-# p list.add_item('watch black bird2', '2022-06-03', 'description')
-# p list.add_item('watch black bird3', '2021-08-03', 'description')
-# p list.add_item('watch black bird4', '2020-11-06', 'description')
-# p list.add_item('watch black bird5', '2020-12-06', 'description')
-# list.down(0, 12)
-# # list.up(4,2)
-
+list = List.new('Chores')
+p list.add_item('watch black bird1', '2023-12-03', 'description')
+p list.add_item('watch black bird2', '2022-06-03', 'description')
+p list.add_item('watch black bird3', '2021-08-03', 'description')
+p list.add_item('watch black bird4', '2020-11-06', 'description')
+p list.add_item('watch black bird5', '2020-12-06', 'description')
+list.toggle_item(0)
+list.toggle_item(1)
+list.toggle_item(3)
+list.print
+list.purge
 # list.sort_by_date!
-# list.print
-# list.print_priority
+list.print
+list.print_priority
