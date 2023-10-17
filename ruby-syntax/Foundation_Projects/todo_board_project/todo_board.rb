@@ -2,7 +2,8 @@ require './list'
 
 class Todo_Board
   def initialize(label)
-    @list = List.new(label)
+    # @list = List.new(label)
+    @lists = {}
   end
 
   def get_command
