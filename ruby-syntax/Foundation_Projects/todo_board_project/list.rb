@@ -2,6 +2,7 @@ require './item'
 
 class List
   attr_accessor :label
+  attr_reader :print
 
   def initialize(label)
     @label = label
@@ -125,17 +126,17 @@ class List
   end
 end
 
-list = List.new('Chores')
-p list.add_item('watch black bird1', '2023-12-03', 'description')
-p list.add_item('watch black bird2', '2022-06-03', 'description')
-p list.add_item('watch black bird3', '2021-08-03', 'description')
-p list.add_item('watch black bird4', '2020-11-06', 'description')
-p list.add_item('watch black bird5', '2020-12-06', 'description')
-list.toggle_item(0)
-list.toggle_item(1)
-list.toggle_item(3)
-list.print
-list.purge
-# list.sort_by_date!
-list.print
-list.print_priority
+# list = List.new('Chores')
+# p list.add_item('watch black bird1', '2023-12-03', 'description')
+# p list.add_item('watch black bird2', '2022-06-03', 'description')
+# p list.add_item('watch black bird3', '2021-08-03', 'description')
+# p list.add_item('watch black bird4', '2020-11-06', 'description')
+# p list.add_item('watch black bird5', '2020-12-06', 'description')
+# list.toggle_item(0)
+# list.toggle_item(1)
+# list.toggle_item(3)
+# list.print
+# list.purge
+# # list.sort_by_date!
+# list.print
+# list.print_priority
