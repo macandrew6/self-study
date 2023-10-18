@@ -2,7 +2,6 @@ require './item'
 
 class List
   attr_accessor :label
-  attr_reader :print
 
   def initialize(label)
     @label = label
