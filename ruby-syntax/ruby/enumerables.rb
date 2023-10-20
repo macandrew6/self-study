@@ -51,8 +51,44 @@ class Array
 
     false
   end
+
+# My Flatten
+# my_flatten should return all elements of the array into a new, one-dimensional 
+# array. Hint: use recursion!
+  def my_flatten
+    flat_arr = []
+    self.my_each do |el|
+      if el.is_a?(Array)
+        flat_arr.concat(el.my_flatten)
+      else
+        flat_arr << el
+      end
+    end
+
+    flat_arr
+  end
+
+# My Zip
+# Write my_zip to take any number of arguments. It should return a new array containing 
+# self.length elements. Each element of the new array should be an array with a length 
+# of the input arguments + 1 and contain the merged elements at that index. If the size 
+# of any argument is less than self, nil is returned for that location.
+  def my_zip(*args)
+    zipped = Array.new(self.length) {Array.new}
+    self.each_with_index do |el, i|
+      zipped[i] << el
+      args.each_with_index do |arr|
+        p zipped
+        zipped[i] << arr[i]
+      end
+    end
+    zipped
+  end
 end
 
-arr = [1, 2, 3, 4]
+a = [ 4, 5, 6 ]
+b = [ 7, 8, 9 ]
 
-p arr.my_any? {|el| el > 2}
+p [1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+p a.my_zip([1,2], [8])   # => [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
+# p [1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
