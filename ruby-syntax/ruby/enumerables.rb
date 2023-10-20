@@ -84,11 +84,40 @@ class Array
     end
     zipped
   end
+
+# My Rotate
+# Write a method my_rotate that returns a new array containing all the elements of 
+# the original array in a rotated order. By default, the array should rotate by one 
+# element. If a negative value is given, the array is rotated in the opposite direction.
+  def my_rotate(num = 1)
+    if num > 0
+      num.times {self.rotate_left}
+    else
+      (num.abs).times {self.rotate_right}
+    end
+    self
+  end
+
+  def rotate_left
+    first_el = self.shift!
+    self.push(first_el)
+  end
+
+  def rotate_right(num)
+    last_el = self.pop!
+    self.unshift(last_el)
+  end
+
 end
 
-a = [ 4, 5, 6 ]
-b = [ 7, 8, 9 ]
+# a = [ 4, 5, 6 ]
+# b = [ 7, 8, 9 ]
 
-p [1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
-p a.my_zip([1,2], [8])   # => [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
-# p [1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
+# p [1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+# p a.my_zip([1,2], [8])   # => [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
+# # p [1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
+a = [ "a", "b", "c", "d" ]
+a.my_rotate         #=> ["b", "c", "d", "a"]
+a.my_rotate(2)      #=> ["c", "d", "a", "b"]
+a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
+a.my_rotate(15)     #=> ["d", "a", "b", "c"]
