@@ -65,11 +65,15 @@ class Array
   end
 
   def bubble_sort(&prc)
+    copy = self.dup
+    copy.bubble_sort!(&prc)
   end
 end
 
-arr = [3, 2, 5, 1, 2, 3]
-p arr.bubble_sort! {|a, b| a <=> b}
+# arr = [3, 2, 5, 1, 2, 3] #[5, 3, 3, 2, 2, 1]
+# p arr.bubble_sort  # 
+# p arr.bubble_sort {|a, b| b <=> a} # self[i] = 2 self[i + 1] = 3
+# p 3.<=>2
 
 # ### Substrings and Subwords
 #
@@ -85,7 +89,16 @@ p arr.bubble_sort! {|a, b| a <=> b}
 # words).
 
 def substrings(string)
+  subs = []
+  (0...string.length).each do |i|
+    (i...string.length).each do |j|
+      subs << string[i..j]
+    end
+  end
+  subs
 end
+
+p substrings('cat')
 
 def subwords(word, dictionary)
 end
