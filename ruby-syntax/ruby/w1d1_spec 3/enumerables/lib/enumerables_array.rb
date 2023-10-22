@@ -90,9 +90,9 @@ end
 
 def substrings(string)
   subs = []
-  (0...string.length).each do |i|
-    (i...string.length).each do |j|
-      subs << string[i..j]
+  (0...string.length).each do |start|
+    (start...string.length).each do |last|
+      subs << string[start..last]
     end
   end
   subs
@@ -101,7 +101,11 @@ end
 p substrings('cat')
 
 def subwords(word, dictionary)
+  subs = substrings(word)
+  dictionary.select {|sub| subs.include?(sub)}
 end
+
+p subwords('cat', ['ca', 'a', 'at'])
 
 # ### Doubler
 # Write a `doubler` method that takes an array of integers and returns an
