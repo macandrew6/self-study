@@ -7,7 +7,7 @@ class Game
   def initialize(player1, player2)
     words = File.readlines("dictionary.txt").map(&:chomp)
     @players = [player1, player2]
-    @fragment = ''
+    @fragment = 'cam'
     @dictionary = Set.new(words)
   end
 
@@ -33,7 +33,7 @@ class Game
       guess = current_player.guess
 
       if !valid_play?(guess)
-        p "this is an invalid guess"
+        current_player.alert_invalid_guess(guess)
       end
     end
 
