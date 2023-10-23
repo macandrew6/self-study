@@ -6,7 +6,8 @@ class Player
   end
   
   def guess
+    p "Add a letter: "
     res = gets.chomp
-    res
+    res.downcase
   end
 end
