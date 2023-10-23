@@ -98,25 +98,26 @@ def substrings(string)
   subs
 end
 
-p substrings('cat')
+# p substrings('cat')
 
 def subwords(word, dictionary)
   subs = substrings(word)
   dictionary.select {|sub| subs.include?(sub)}
 end
 
-p subwords('cat', ['ca', 'a', 'at'])
+# p subwords('cat', ['ca', 'a', 'at'])
 
 # ### Doubler
 # Write a `doubler` method that takes an array of integers and returns an
 # array with the original elements multiplied by two.
 
 def doubler(array)
-  doubled = []
-  array.each do |el|
-    doubled << el * 2
-  end
-  doubled
+  # doubled = []
+  # array.each do |el|
+  #   doubled << el * 2
+  # end
+  # doubled
+  array.map{|el| el * 2}
 end
 
 p doubler([1, 2, 3, 4])
