@@ -112,7 +112,14 @@ p subwords('cat', ['ca', 'a', 'at'])
 # array with the original elements multiplied by two.
 
 def doubler(array)
+  doubled = []
+  array.each do |el|
+    doubled << el * 2
+  end
+  doubled
 end
+
+p doubler([1, 2, 3, 4])
 
 # ### My Each
 # Extend the Array class to include a method named `my_each` that takes a
