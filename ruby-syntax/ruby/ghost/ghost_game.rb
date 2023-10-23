@@ -9,6 +9,7 @@ class Game
     @players = [player1, player2]
     @fragment = 'cam'
     @dictionary = Set.new(words)
+    @losses = Hash.new {|losses, player| losses[player] = 0}
   end
 
   def current_player
@@ -38,7 +39,7 @@ class Game
     end
 
     add_letter(guess)
-    p "#{current_player} has added #{guess} to the fragment"
+    p "#{current_player.name} has added #{guess}. The new fragment is #{@fragment}"
   end
 
   def valid_play?(str)
@@ -47,6 +48,10 @@ class Game
     @dictionary.any? do |word|
       word.start_with?(new_frag)
     end
+  end
+
+  def losses
+
   end
 end
 
