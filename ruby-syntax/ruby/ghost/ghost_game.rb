@@ -20,11 +20,16 @@ class Game
   end
 
   def previous_player
-    @players.last
+    (@players.count - 1).downto(0) do |i|
+      player = @players[i]
+      return player if losses[player] < MAX_LOSS_COUNT
+    end
   end
 
   def next_player!
     @players.rotate!
+
+    @players.rotate! until losses[current_player] < MAX_LOSS_COUNT
   end
 
   def add_letter(letter)
@@ -34,8 +39,10 @@ class Game
   def play_round
     @fragment = ''
     p 'Welcome!'
-    p "Lets play a round of GHOST"
+    display_standings
+
     until round_over?
+      # p @fragment
       take_turn
       next_player!
     end
@@ -45,7 +52,13 @@ class Game
   def run
     until game_over?
       play_round
+      p "#{winner} has won the game!"
     end
+  end
+
+  def winner
+    player = losses.find {|player, losses| losses < MAX_LOSS_COUNT}
+    player
   end
 
   def game_over?
@@ -58,12 +71,14 @@ class Game
   
   def record(player)
     count = @losses[player]
-    'GHOST'.slice(0..count)
+    'GHOST'.slice(0, count)
   end
 
   def take_turn
-    system("clear")
+    # system("clear")
+    p "It's #{current_player.name}'s turn"
     guess = nil
+
     until valid_play?(guess)
       guess = current_player.guess
 
@@ -115,5 +130,7 @@ end
 
 player1 = Player.new('Catniss')
 player2 = Player.new('Peta')
-game = Game.new(player1, player2)
+player3 = Player.new('Heymage')
+# player4 = Player.new('Queenie')
+game = Game.new(player1, player2, player3)
 p game.run
