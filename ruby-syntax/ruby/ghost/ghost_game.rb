@@ -44,13 +44,6 @@ class Game
     end
   end
 
-  def display_standings
-    p "Current standings are: "
-    players.each do |player|
-      p "#{player.name} has : #{record(player)}"
-    end
-  end
-
   def game_over?
     remaining_players == 1
   end
@@ -86,13 +79,18 @@ class Game
     end
   end
 
-  def losses
-    losses[current_player] += 1
-  end
-
   def round_over?
     dictionary.include?(fragment)
   end
+
+  def display_standings
+    p "Current standings are: "
+    players.each do |player|
+      p "#{player.name} has : #{record(player)}"
+    end
+  end
+
+  def update_standings
 end
 
 player1 = Player.new('Catniss')
