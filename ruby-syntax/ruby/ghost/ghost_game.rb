@@ -5,7 +5,7 @@ class Game
   attr_reader :fragment, :dictionary, :losses, :players
 
   ALPHA = ('a'..'z').to_a
-  MAX_LOSS_COUNT = 5
+  MAX_LOSS_COUNT = 3
 
   def initialize(*players)
     words = File.readlines("dictionary.txt").map(&:chomp)
@@ -58,7 +58,7 @@ class Game
 
   def winner
     player = losses.find {|player, losses| losses < MAX_LOSS_COUNT}
-    player.name
+    player[0].name
   end
 
   def game_over?
@@ -133,4 +133,4 @@ player2 = Player.new('Peta')
 player3 = Player.new('Heymage')
 # player4 = Player.new('Queenie')
 game = Game.new(player1, player2, player3)
-p game.run
+game.run
