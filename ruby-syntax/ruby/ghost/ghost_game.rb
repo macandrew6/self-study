@@ -3,11 +3,12 @@ require_relative "player"
 
 class Game
   ALPHA = ('a'..'z').to_a
+  MAX_LOSS_COUNT = 5
 
-  def initialize(player1, player2)
+  def initialize(*players)
     words = File.readlines("dictionary.txt").map(&:chomp)
-    @players = [player1, player2]
-    @fragment = 'cam'
+    @players = players
+    @fragment = ''
     @dictionary = Set.new(words)
     @losses = Hash.new {|losses, player| losses[player] = 0}
   end
@@ -20,7 +21,7 @@ class Game
     @players.last
   end
 
-  def next_player
+  def next_player!
     @players.rotate!
   end
 
@@ -33,7 +34,34 @@ class Game
     p "Lets play a round of GHOST"
     until round_over?
       take_turn
+      next_player!
     end
+  end
+
+  def run
+    until game_over?
+      play_round
+    end
+  end
+
+  def display_standings
+    p "Current standings are: "
+    players.each do |player|
+      p "#{player.name} has : #{record(player)}"
+    end
+  end
+
+  def game_over?
+    remaining_players == 1
+  end
+
+  def remaining_players
+    losses.count {|k, v| v < MAX_LOSS_COUNT}
+  end
+  
+  def record(player)
+    count = losses[player]
+    'GHOST'.slice(0..count)
   end
 
   def take_turn
