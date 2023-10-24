@@ -36,6 +36,7 @@ class Game
       take_turn
       next_player!
     end
+    update_standings
   end
 
   def run
@@ -91,9 +92,19 @@ class Game
   end
 
   def update_standings
+    "#{previous_player} has spelled #{fragment}"
+    "#{previous_player} gets a letter"
+
+    if losses[previous_player] == MAX_LOSS_COUNT - 1
+      p "#{previous_player} is eliminated."
+    end
+    
+    losses[previous_player] += 1
+    display_standings
+  end
 end
 
 player1 = Player.new('Catniss')
 player2 = Player.new('Peta')
 game = Game.new(player1, player2)
-p game.take_turn
+p game.run
