@@ -52,13 +52,13 @@ class Game
   def run
     until game_over?
       play_round
-      p "#{winner} has won the game!"
     end
+    p "#{winner} has won the game!"
   end
 
   def winner
     player = losses.find {|player, losses| losses < MAX_LOSS_COUNT}
-    player
+    player.name
   end
 
   def game_over?
