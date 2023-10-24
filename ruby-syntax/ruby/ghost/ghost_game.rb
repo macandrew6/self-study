@@ -28,6 +28,14 @@ class Game
     @fragment += letter
   end
 
+  def play_round
+    p 'Welcome!'
+    p "Lets play a round of GHOST"
+    until round_over?
+      take_turn
+    end
+  end
+
   def take_turn
     guess = nil
     until valid_play?(guess)
@@ -51,7 +59,11 @@ class Game
   end
 
   def losses
+    losses[current_player] += 1
+  end
 
+  def round_over?
+    dictionary.include?(fragment)
   end
 end
 
