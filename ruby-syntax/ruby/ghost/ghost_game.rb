@@ -128,9 +128,11 @@ class Game
   end
 end
 
-player1 = Player.new('Catniss')
-player2 = Player.new('Peta')
-player3 = Player.new('Heymage')
-# player4 = Player.new('Queenie')
-game = Game.new(player1, player2, player3)
-game.run
+if $PROGRAM_NAME == __FILE__
+  player1 = Player.new('Catniss')
+  player2 = Player.new('Peta')
+  player3 = Player.new('Heymage')
+  # player4 = Player.new('Queenie')
+  game = Game.new(player1, player2, player3)
+  game.run
+end
