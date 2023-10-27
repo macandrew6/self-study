@@ -3,6 +3,8 @@ class Maze
 
   def initialize(filename)
     @map = load_map(filename)
+    @start_idx 
+    @end_idx
   end
 
   def load_map(filename)
