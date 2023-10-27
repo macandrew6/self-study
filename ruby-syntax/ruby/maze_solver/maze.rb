@@ -9,10 +9,9 @@ class Maze
     maze = []
     File.open(filename).each do |line|
       chars = line.split("")
-      p chars
-      # maze << chars
+      maze << chars
     end
-    # p maze
+    maze
   end
 end
 
