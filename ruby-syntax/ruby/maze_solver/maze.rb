@@ -3,8 +3,8 @@ class Maze
 
   def initialize(filename)
     @map = load_map(filename)
-    @start_idx 
-    @end_idx
+    @start_idx = find_start
+    @end_idx = find_end
   end
 
   def load_map(filename)
@@ -14,6 +14,14 @@ class Maze
       maze << chars
     end
     maze
+  end
+
+  def find_start
+    find_char("S")
+  end
+
+  def find_end
+    find_char("E")
   end
 
   def find_char(char)
