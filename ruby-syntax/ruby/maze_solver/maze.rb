@@ -15,6 +15,12 @@ class Maze
     end
     maze
   end
+
+  def find_char(char)
+    @map.each_with_index do |line, y|
+      return [line.index(char), y] if line.index(char)
+    end
+  end
 end
 
 maze = Maze.new("maze.txt")
