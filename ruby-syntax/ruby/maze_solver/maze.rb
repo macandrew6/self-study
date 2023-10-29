@@ -33,3 +33,5 @@ end
 
 maze = Maze.new("maze.txt")
 p maze.load_map("maze.txt")
+p maze.find_start
+p maze.find_end
