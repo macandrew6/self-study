@@ -34,8 +34,21 @@ class Maze
       return [line.index(char), y] if line.index(char)
     end
   end
+
+  def to_s
+    string = "MAZE: #{@title}\n"
+    @map.each do |line|
+      string << line.join("")
+    end
+    string
+  end
+
+  def is_wall?(point)
+    x, y = point
+    @map[x][y] == "*"
+  end
 end
 
 maze = Maze.new("maze.txt")
 p maze.load_map("maze.txt")
-p maze.parse_title("maze.txt")
+p maze.is_wall([0, 0])
