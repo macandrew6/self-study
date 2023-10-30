@@ -73,21 +73,32 @@ class Maze
     return neighbors
   end
 
+  def travel_path(path)
+    copy_map = deep_dup(@map)
+    show_path(copy_map)
+  end
+
+  def show_path(map)
+    map.each do |line|
+      puts line.join("")
+    end
+  end
+
   private
 
-  def deep_dup(item)
-    unless item.class == Array
-      item.dup
+  def deep_dup(items)
+    unless items.class == Array
+      items.dup
     else
       new_arr = []
-      item.each do |x|
-        new_arr << deep_dup(x)
+      items.each do |item|
+        new_arr << deep_dup(item)
       end
       new_arr
     end
   end
 end
 
+path = [[1, 6], [1, 5], [1, 4], [1, 3], [1, 2], [1, 1], [2, 1], [2, 2]]
 maze = Maze.new("maze.txt")
-p maze.load_map("maze.txt")
-p maze.map
+p maze.travel_path(path)
