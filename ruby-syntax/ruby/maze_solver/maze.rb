@@ -3,6 +3,7 @@ class Maze
 
   def initialize(filename)
     @map = load_map(filename)
+    @title = parse_title(filename)
     @start_idx = find_start
     @end_idx = find_end
   end
@@ -14,6 +15,10 @@ class Maze
       maze << chars
     end
     maze
+  end
+
+  def parse_title(filename)
+    filename.match(/(.+)\.txt/)[1]
   end
 
   def find_start
@@ -33,5 +38,4 @@ end
 
 maze = Maze.new("maze.txt")
 p maze.load_map("maze.txt")
-p maze.find_start
-p maze.find_end
+p maze.parse_title("maze.txt")
