@@ -43,7 +43,7 @@ class Maze
     @map.each do |line|
       string << line.join("")
     end
-    
+
     string
   end
 
@@ -72,8 +72,22 @@ class Maze
 
     return neighbors
   end
+
+  private
+
+  def deep_dup(item)
+    unless item.class == Array
+      item.dup
+    else
+      new_arr = []
+      item.each do |x|
+        new_arr << deep_dup(x)
+      end
+      new_arr
+    end
+  end
 end
 
 maze = Maze.new("maze.txt")
 p maze.load_map("maze.txt")
-p maze.find_neighbors([1, 3])
+p maze.map
