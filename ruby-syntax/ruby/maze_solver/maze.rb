@@ -1,5 +1,7 @@
 class Maze
-  attr_reader :map
+  # attr_reader
+
+  DELTAS = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
   def initialize(filename)
     @map = load_map(filename)
@@ -37,9 +39,11 @@ class Maze
 
   def to_s
     string = "MAZE: #{@title}\n"
+
     @map.each do |line|
       string << line.join("")
     end
+    
     string
   end
 
@@ -55,8 +59,21 @@ class Maze
     not_negative && in_bounds
   end
     
+  def find_neighbors(point)
+    p_x, p_y = point
+    neighbors = []
+
+    DELTAS.each do |d_x, d_y|
+      neighbor = [(d_x + p_x), (d_y + p_y)]
+      if in_maze?(neighbor) && !is_wall?(neighbor)
+        neighbors << neighbor
+      end
+    end
+
+    return neighbors
+  end
 end
 
 maze = Maze.new("maze.txt")
 p maze.load_map("maze.txt")
-p maze.is_wall?([1, 3])
+p maze.find_neighbors([1, 3])
