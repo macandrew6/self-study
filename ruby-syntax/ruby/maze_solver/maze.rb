@@ -47,6 +47,14 @@ class Maze
     x, y = point
     @map[x][y] == "*"
   end
+
+  def in_maze?(point)
+    x, y = point
+    not_negative = x >= 0 && y >= 0
+    in_bounds = x <= @map[0].length && y <= @map.length
+    not_negative && in_bounds
+  end
+    
 end
 
 maze = Maze.new("maze.txt")
