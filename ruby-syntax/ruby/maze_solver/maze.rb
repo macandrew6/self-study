@@ -74,7 +74,11 @@ class Maze
   end
 
   def travel_path(path)
+    p "Traveling path of #{path.inspect}"
     copy_map = deep_dup(@map)
+    path.each do |coords|
+      
+    end
     show_path(copy_map)
   end
 
@@ -102,3 +106,4 @@ end
 path = [[1, 6], [1, 5], [1, 4], [1, 3], [1, 2], [1, 1], [2, 1], [2, 2]]
 maze = Maze.new("maze.txt")
 p maze.travel_path(path)
+p path.inspect
