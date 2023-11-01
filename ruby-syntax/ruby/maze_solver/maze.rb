@@ -77,6 +77,7 @@ class Maze
     p "Traveling path of #{path.inspect}"
     copy_map = deep_dup(@map)
     path.each do |coords|
+      x, y = coords
       
     end
     show_path(copy_map)
