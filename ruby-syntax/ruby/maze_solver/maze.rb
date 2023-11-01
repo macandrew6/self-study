@@ -78,16 +78,17 @@ class Maze
     copy_map = deep_dup(@map)
     path.each do |coords|
       x, y = coords
-      point = copy_map[x][y]
+      point = copy_map[y][x]
 
       if point == 'X'
         p "This path back-tracks to #{x}, #{y}"
       elsif point == "*"
         p "This path hits a wall at #{x}, #{y}"
       else
-        copy_map[x][y] = "X"
+        copy_map[y][x] = "X"
       end
     end
+
     show_path(copy_map)
   end
 
@@ -115,4 +116,3 @@ end
 path = [[1, 6], [1, 5], [1, 4], [1, 3], [1, 2], [1, 1], [2, 1], [2, 2]]
 maze = Maze.new("maze.txt")
 p maze.travel_path(path)
-p path.inspect
