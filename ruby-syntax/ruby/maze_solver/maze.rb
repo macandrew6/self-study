@@ -78,7 +78,15 @@ class Maze
     copy_map = deep_dup(@map)
     path.each do |coords|
       x, y = coords
-      
+      point = copy_map[x][y]
+
+      if point == 'X'
+        p "This path back-tracks to #{x}, #{y}"
+      elsif point == "*"
+        p "This path hits a wall at #{x}, #{y}"
+      else
+        copy_map[x][y] = "X"
+      end
     end
     show_path(copy_map)
   end
