@@ -1,5 +1,5 @@
 class Maze
-  # attr_reader
+  attr_reader :start_idx, :end_idx
 
   DELTAS = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
