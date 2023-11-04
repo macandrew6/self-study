@@ -16,12 +16,18 @@ class Solver
     path = [goal]
     spot = goal
 
-    until @branching_paths[spot] = nil
+    until @branching_paths[spot] == nil
       path << @branching_paths[spot]
       spot = @branching_paths[spot]
     end
 
     path
+  end
+
+  def find_manhattan_estimate(point)
+    dist_to_end = find_distance(point)
+    dist_traveled = find_path(point).length
+    f = dist_to_end + dist_traveled
   end
 
   private
@@ -38,4 +44,5 @@ test_maze = Maze.new(filename)
 test_maze.travel_path(path)
 solver = Solver.new(test_maze)
 p solver.find_path
+# p solver.find_distance([1, 2])
 # p solver
