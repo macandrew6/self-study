@@ -9,11 +9,19 @@ class Solver
   def find_distance(point)
     p_x, p_y = point
     final_x, final_y = @maze.find_end
-    ((p_x + final_x), (p_y + final_y)).abs
+    ((p_x - final_x) + (p_y - final_y)).abs
   end
 
   def find_path(goal = @maze.find_end)
+    path = [goal]
+    spot = goal
 
+    until @branching_paths[spot] = nil
+      path << @branching_paths[spot]
+      spot = @branching_paths[spot]
+    end
+
+    path
   end
 
   private
@@ -29,4 +37,5 @@ filename = ARGV[0] || "maze.txt"
 test_maze = Maze.new(filename)
 test_maze.travel_path(path)
 solver = Solver.new(test_maze)
-p solver
+p solver.find_path
+# p solver
