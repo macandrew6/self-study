@@ -28,6 +28,7 @@ class Solver
     dist_to_end = find_distance(point)
     dist_traveled = find_path(point).length
     f = dist_to_end + dist_traveled
+    # return f
   end
 
   private
@@ -43,7 +44,8 @@ filename = ARGV[0] || "maze.txt"
 test_maze = Maze.new(filename)
 test_maze.travel_path(path)
 solver = Solver.new(test_maze)
+p test_maze.find_end
 # p solver.find_path
 # p solver.find_distance([1, 2])
-solver.find_manhattan_estimate([1, 5])
+p solver.find_manhattan_estimate([14, 1])
 # p solver
