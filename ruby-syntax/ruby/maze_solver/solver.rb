@@ -43,6 +43,7 @@ filename = ARGV[0] || "maze.txt"
 test_maze = Maze.new(filename)
 test_maze.travel_path(path)
 solver = Solver.new(test_maze)
-p solver.find_path
+# p solver.find_path
 # p solver.find_distance([1, 2])
+solver.find_manhattan_estimate([1, 5])
 # p solver
