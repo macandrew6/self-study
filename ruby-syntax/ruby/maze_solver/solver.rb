@@ -28,9 +28,19 @@ class Solver
     dist_to_end = find_distance(point)
     dist_traveled = find_path(point).length
     f = dist_to_end + dist_traveled
-    # return f
   end
 
+  def manhattan_heuristic(queue)
+    queue.inject do |chosen_point, point|
+      p "Chosen_point #{chosen_point.inspect}"
+      p "Point #{point.inspect}"
+      old_f = find_manhattan_estimate(chosen_point)
+      new_f = find_manhattan_estimate(point)
+      old_f > new_f ? point : chosen_point
+    end
+  end
+
+  
   private
   
   def reset_values
