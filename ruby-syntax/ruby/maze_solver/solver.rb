@@ -41,7 +41,9 @@ class Solver
   def build_branching_paths(heuristic = :manhattan_heuristic)
     reset_values
     queue = [@current]
+    p "the queue: #{queue}"
     visited = [@current]
+    p "the visited: #{visited}"
 
     until queue.empty? || @current == @maze.find_end
       @current = self.send(heuristic, queue)
