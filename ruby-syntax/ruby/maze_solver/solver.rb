@@ -45,7 +45,7 @@ test_maze = Maze.new(filename)
 test_maze.travel_path(path)
 solver = Solver.new(test_maze)
 p test_maze.find_end
-# p solver.find_path
-# p solver.find_distance([1, 2])
+p solver.find_path
+p solver.find_distance([1, 2])
 p solver.find_manhattan_estimate([14, 1])
 # p solver
