@@ -40,7 +40,29 @@ class Solver
     end
   end
 
-  
+  def build_branching_paths(heuristic = :manhattan_heuristic)
+    reset_values
+    queue = [@current]
+    visited = [@current]
+
+    until queue.empty? || @current = @maze.find_end
+      @current = self.send(heuristic, queue)
+      queue.delete(@current)
+      visited << @current
+
+      nearby_openings = @maze.find_neighbors(@current)
+
+      nearby_openings.each do |neighbor|
+        unless visited.include?(neighbor) || queue.include?(neighbor)
+          queue << neighbor
+          branching_paths[neighbor] = @current
+        end
+      end
+    end
+
+    @branching_paths
+  end
+
   private
   
   def reset_values
@@ -54,8 +76,9 @@ filename = ARGV[0] || "maze.txt"
 test_maze = Maze.new(filename)
 test_maze.travel_path(path)
 solver = Solver.new(test_maze)
-p test_maze.find_end
-p solver.find_path
-p solver.find_distance([1, 2])
-p solver.find_manhattan_estimate([14, 1])
+# p test_maze.find_end
+# p solver.find_path
+# p solver.find_distance([1, 2])
+# p solver.find_manhattan_estimate([14, 1])
+p solver.manhattan_heuristic(path)
 # p solver
