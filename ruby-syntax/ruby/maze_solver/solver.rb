@@ -32,8 +32,6 @@ class Solver
 
   def manhattan_heuristic(queue)
     queue.inject do |chosen_point, point|
-      p "Chosen_point #{chosen_point.inspect}"
-      p "Point #{point.inspect}"
       old_f = find_manhattan_estimate(chosen_point)
       new_f = find_manhattan_estimate(point)
       old_f > new_f ? point : chosen_point
@@ -45,7 +43,7 @@ class Solver
     queue = [@current]
     visited = [@current]
 
-    until queue.empty? || @current = @maze.find_end
+    until queue.empty? || @current == @maze.find_end
       @current = self.send(heuristic, queue)
       queue.delete(@current)
       visited << @current
@@ -55,12 +53,18 @@ class Solver
       nearby_openings.each do |neighbor|
         unless visited.include?(neighbor) || queue.include?(neighbor)
           queue << neighbor
-          branching_paths[neighbor] = @current
+          @branching_paths[neighbor] = @current
         end
       end
     end
 
     @branching_paths
+  end
+
+  def solve(heuristic = :manhattan_heuristic)
+    build_branching_paths(heuristic)
+    path = find_path
+    @maze.travel_path(path)
   end
 
   private
@@ -70,15 +74,10 @@ class Solver
     @current = @maze.find_start
   end
 end
-
-path = [[1, 6], [1, 5], [1, 4], [1, 3], [1, 2], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
-filename = ARGV[0] || "maze.txt"
-test_maze = Maze.new(filename)
-test_maze.travel_path(path)
-solver = Solver.new(test_maze)
-# p test_maze.find_end
-# p solver.find_path
-# p solver.find_distance([1, 2])
-# p solver.find_manhattan_estimate([14, 1])
-p solver.manhattan_heuristic(path)
-# p solver
+if __FILE__ == $PROGRAM_NAME
+  filename = ARGV[0] || "maze.txt"
+  test_maze = Maze.new(filename)
+  p test_maze
+  solver = Solver.new(test_maze)
+  solver.solve
+end
