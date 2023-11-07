@@ -37,6 +37,7 @@ class Solver
     end
   end
 
+  #breath first search using a queue
   def build_branching_paths(heuristic = :manhattan_heuristic)
     reset_values
     queue = [@current]
