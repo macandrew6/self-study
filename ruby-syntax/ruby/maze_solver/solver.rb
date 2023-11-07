@@ -41,11 +41,11 @@ class Solver
   def build_branching_paths(heuristic = :manhattan_heuristic)
     reset_values
     queue = [@current]
-    p "the queue: #{queue}"
     visited = [@current]
-    p "the visited: #{visited}"
-
+    
     until queue.empty? || @current == @maze.find_end
+      # p "the queue: #{queue}"
+      # p "the visited: #{visited}"
       @current = self.send(heuristic, queue)
       queue.delete(@current)
       visited << @current
@@ -66,6 +66,7 @@ class Solver
   def solve(heuristic = :manhattan_heuristic)
     build_branching_paths(heuristic)
     path = find_path
+    p "the path : #{path}"
     @maze.travel_path(path)
   end
 
@@ -79,7 +80,9 @@ end
 if __FILE__ == $PROGRAM_NAME
   filename = ARGV[0] || "maze.txt"
   test_maze = Maze.new(filename)
-  p test_maze
+  puts test_maze
+  puts "Start is at #{test_maze.find_start}"
+  puts "End is at #{test_maze.find_end}"
   solver = Solver.new(test_maze)
   solver.solve
 end

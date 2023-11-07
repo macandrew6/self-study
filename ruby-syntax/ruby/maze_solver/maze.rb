@@ -12,8 +12,8 @@ class Maze
 
   def load_map(filename)
     maze = []
-    File.open(filename).each do |line|
-      chars = line.split("")
+    File.open(filename).each_line do |line|
+      chars = line.split(//)
       maze << chars
     end
     maze
@@ -65,7 +65,7 @@ class Maze
 
     DELTAS.each do |d_x, d_y|
       neighbor = [(d_x + p_x), (d_y + p_y)]
-      if in_maze?(neighbor) && !is_wall?(neighbor)
+      if in_maze?(neighbor) && !(is_wall?(neighbor))
         neighbors << neighbor
       end
     end
