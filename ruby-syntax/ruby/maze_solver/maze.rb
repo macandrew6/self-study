@@ -49,13 +49,13 @@ class Maze
 
   def is_wall?(point)
     x, y = point
-    @map[x][y] == "*"
+    @map[y][x] == "*"
   end
 
   def in_maze?(point)
     x, y = point
-    not_negative = x >= 0 && y >= 0
-    in_bounds = x <= @map[0].length && y <= @map.length
+    not_negative = (x >= 0) && (y >= 0)
+    in_bounds = (x <= @map[0].length) && (y <= @map.length)
     not_negative && in_bounds
   end
     
@@ -70,7 +70,7 @@ class Maze
       end
     end
 
-    return neighbors
+    neighbors
   end
 
   def travel_path(path)

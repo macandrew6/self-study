@@ -20,7 +20,6 @@ class Solver
       path << @branching_paths[spot]
       spot = @branching_paths[spot]
     end
-
     path
   end
 
@@ -44,8 +43,8 @@ class Solver
     visited = [@current]
     
     until queue.empty? || @current == @maze.find_end
-      # p "the queue: #{queue}"
-      # p "the visited: #{visited}"
+      p "The Queue : #{queue}"
+      p "The Visited : #{visited}"
       @current = self.send(heuristic, queue)
       queue.delete(@current)
       visited << @current
@@ -66,7 +65,6 @@ class Solver
   def solve(heuristic = :manhattan_heuristic)
     build_branching_paths(heuristic)
     path = find_path
-    p "the path : #{path}"
     @maze.travel_path(path)
   end
 
