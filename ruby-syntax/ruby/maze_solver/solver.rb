@@ -43,8 +43,8 @@ class Solver
     visited = [@current]
     
     until queue.empty? || @current == @maze.find_end
-      p "The Queue : #{queue}"
-      p "The Visited : #{visited}"
+      # p "The Queue : #{queue}"
+      # p "The Visited : #{visited}"
       @current = self.send(heuristic, queue)
       queue.delete(@current)
       visited << @current
