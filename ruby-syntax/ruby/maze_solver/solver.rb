@@ -76,6 +76,7 @@ class Solver
     @current = @maze.find_start
   end
 end
+
 if __FILE__ == $PROGRAM_NAME
   filename = ARGV[0] || "maze.txt"
   test_maze = Maze.new(filename)

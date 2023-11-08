@@ -112,7 +112,3 @@ class Maze
     end
   end
 end
-
-# path = [[1, 6], [1, 5], [1, 4], [1, 3], [1, 2], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
-# maze = Maze.new("maze.txt")
-# p maze.travel_path(path)
