@@ -7,11 +7,11 @@ class Card
   end
 
   def hide
-
+    @faced_up = false
   end
 
   def reveal
-
+    @faced_up = true
   end
 
   def to_s
@@ -28,4 +28,5 @@ end
 card1 = Card.new('A')
 card2 = Card.new('B')
 card3 = Card.new('A')
-p card1==card3
+card1.reveal
+p card1
