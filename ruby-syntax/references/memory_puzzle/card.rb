@@ -15,7 +15,7 @@ class Card
   end
 
   def to_s
-
+    faced_up ? face_value.to_s : " "
   end
 
   def ==(other_card)
@@ -28,5 +28,4 @@ end
 card1 = Card.new('A')
 card2 = Card.new('B')
 card3 = Card.new('A')
-card1.reveal
-p card1
+p card1==card2
