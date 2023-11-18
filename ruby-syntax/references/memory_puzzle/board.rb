@@ -6,4 +6,4 @@ class Board
   end
 end
 
-card = Card.new("A")
+p card = Card.new("A")
