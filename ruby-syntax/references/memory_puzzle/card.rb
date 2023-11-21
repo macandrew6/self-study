@@ -1,4 +1,10 @@
 class Card
+  VALUES = ("A".."Z").to_a
+
+  def self.shuffled_pairs(num_pairs)
+    values = VALUES
+  end
+  
   attr_reader :face_value
   
   def initialize(face_value, faced_up=false)
