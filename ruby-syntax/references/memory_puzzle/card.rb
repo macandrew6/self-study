@@ -3,6 +3,14 @@ class Card
 
   def self.shuffled_pairs(num_pairs)
     values = VALUES
+
+    if num_pairs > values.length
+      values = values + values
+    end
+
+    values = values.shuffle.take(num_pairs) * 2
+    values.shuffle!
+    values.map {|val| self.new(value)}
   end
   
   attr_reader :face_value
@@ -34,4 +42,5 @@ end
 card1 = Card.new('A')
 card2 = Card.new('B')
 card3 = Card.new('A')
+p Card.shuffled_pairs(10)
 p card1==card2
