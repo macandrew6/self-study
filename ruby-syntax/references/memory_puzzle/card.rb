@@ -10,7 +10,7 @@ class Card
 
     values = values.shuffle.take(num_pairs) * 2
     values.shuffle!
-    values.map {|val| self.new(value)}
+    values.map {|val| self.new(val).face_value}
   end
   
   attr_reader :face_value
@@ -33,8 +33,6 @@ class Card
   end
 
   def ==(other_card)
-    p "im running #{@face_value}"
-    p other_card.face_value
     @face_value == other_card.face_value
   end
 end
@@ -42,5 +40,5 @@ end
 card1 = Card.new('A')
 card2 = Card.new('B')
 card3 = Card.new('A')
-p Card.shuffled_pairs(10)
+p Card.shuffled_pairs(4)
 p card1==card2
