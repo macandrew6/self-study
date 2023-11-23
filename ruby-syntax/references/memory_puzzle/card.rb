@@ -10,7 +10,7 @@ class Card
 
     values = values.shuffle.take(num_pairs) * 2
     values.shuffle!
-    values.map {|val| self.new(val).face_value}
+    values.map {|val| self.new(val)}
   end
   
   attr_reader :face_value
