@@ -7,7 +7,8 @@ class Board
   end
 
   def populate
-
+    num_pairs = (size**2)/2
+    Card.shuffled_pairs(num_pairs)
   end
 
   def render
