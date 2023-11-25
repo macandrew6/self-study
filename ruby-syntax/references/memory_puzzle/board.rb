@@ -6,6 +6,7 @@ class Board
   def initialize(size = 4)
     @grid = Array.new(size) { Array.new(size) }
     @size = size
+    populate
   end
 
   def [](pos)
@@ -37,6 +38,6 @@ class Board
   attr_reader :grid
 end
 
-p card = Card.new("A")
+# p card = Card.new("A")
 board = Board.new
-p board.populate
+p board
