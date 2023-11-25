@@ -30,7 +30,11 @@ class Board
   end
 
   def render
-
+    system("clear")
+    puts "  #{(0..size).to_a.join(' ')}"
+    grid.each_with_index do |row, i|
+      puts "#{i} #{row.join(' ')}"
+    end
   end
 
   private
@@ -38,6 +42,5 @@ class Board
   attr_reader :grid
 end
 
-# p card = Card.new("A")
 board = Board.new
-p board
+p board.render

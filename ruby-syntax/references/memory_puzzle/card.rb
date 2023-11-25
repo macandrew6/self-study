@@ -29,7 +29,7 @@ class Card
   end
 
   def to_s
-    faced_up ? face_value.to_s : " "
+    @faced_up ? face_value.to_s : " "
   end
 
   def ==(other_card)
