@@ -8,10 +8,24 @@ class Board
     @size = size
   end
 
+  def [](pos)
+    row, col = pos
+    grid[row][col]
+  end
+
+  def []=(pos, value)
+    row, col = pos
+    grid[row][col] = value
+  end
+
   def populate
     num_pairs = (size**2)/2
     cards = Card.shuffled_pairs(num_pairs)
-    p grid
+    grid.each_index do |i|
+      grid[i].each_index do |j|
+        self[[i, j]] = cards.pop
+      end
+    end
   end
 
   def render
