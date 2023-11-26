@@ -19,6 +19,10 @@ class Board
     grid[row][col] = value
   end
 
+  def hide(pos)
+    self[pos].hide
+  end
+
   def populate
     num_pairs = (size**2)/2
     cards = Card.shuffled_pairs(num_pairs)
