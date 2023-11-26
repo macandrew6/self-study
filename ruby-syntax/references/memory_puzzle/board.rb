@@ -47,4 +47,5 @@ class Board
 end
 
 board = Board.new
-p board.render
+board.hide(1, 2)
+p board
