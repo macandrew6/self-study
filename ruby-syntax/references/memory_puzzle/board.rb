@@ -47,5 +47,5 @@ class Board
 end
 
 board = Board.new
-board.hide(1, 2)
+board.hide([1, 2])
 p board
