@@ -43,4 +43,4 @@ class Board
 end
 
 board = Board.new
-board.render
+p board.render
