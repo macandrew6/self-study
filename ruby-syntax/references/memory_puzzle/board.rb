@@ -23,6 +23,10 @@ class Board
     self[pos].hide
   end
 
+  def reveal(pos)
+
+  end
+
   def populate
     num_pairs = (size**2)/2
     cards = Card.shuffled_pairs(num_pairs)
