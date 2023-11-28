@@ -24,7 +24,16 @@ class Board
   end
 
   def reveal(pos)
+    if revealed?(pos)
+      puts "You can't flip a card if it's already been revealed"
+    else
+      self[pos].reveal
+    end
+    self[pos].value
+  end
 
+  def revealed?(pos)
+    self[pos].revealed?
   end
 
   def populate
@@ -52,4 +61,5 @@ end
 
 board = Board.new
 board.hide([1, 2])
+p board.reveal([1, 2])
 p board.render
