@@ -28,6 +28,10 @@ class Card
     @faced_up = true
   end
 
+  def reveal?
+    @faced_up
+  end
+
   def to_s
     @faced_up ? face_value.to_s : " "
   end

@@ -52,4 +52,4 @@ end
 
 board = Board.new
 board.hide([1, 2])
-p board
+p board.render
