@@ -29,11 +29,11 @@ class Board
     else
       self[pos].reveal
     end
-    self[pos].value
+    self[pos].face_value
   end
 
   def revealed?(pos)
-    self[pos].revealed?
+    self[pos].reveal?
   end
 
   def populate
