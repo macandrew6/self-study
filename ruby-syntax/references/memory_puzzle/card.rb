@@ -28,7 +28,7 @@ class Card
     @faced_up = true
   end
 
-  def reveal?
+  def revealed?
     @faced_up
   end
 

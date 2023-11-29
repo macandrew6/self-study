@@ -33,7 +33,7 @@ class Board
   end
 
   def revealed?(pos)
-    self[pos].reveal?
+    self[pos].revealed?
   end
 
   def populate
