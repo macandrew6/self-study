@@ -62,4 +62,7 @@ end
 board = Board.new
 board.hide([1, 2])
 p board.reveal([1, 2])
+p board.reveal([3, 2])
+p board.reveal([4, 2])
+p board.reveal([4, 1])
 p board.render
