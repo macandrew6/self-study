@@ -48,7 +48,7 @@ class Board
 
   def render
     system("clear")
-    puts "  #{(0..size).to_a.join(' ')}"
+    puts "  #{(0...size).to_a.join(' ')}"
     grid.each_with_index do |row, i|
       puts "#{i} #{row.join(' ')}"
     end
@@ -63,6 +63,7 @@ board = Board.new
 board.hide([1, 2])
 p board.reveal([1, 2])
 p board.reveal([3, 2])
-p board.reveal([4, 2])
-p board.reveal([4, 1])
+p board.reveal([3, 3])
+p board.reveal([3, 1])
+p board.reveal([3, 0])
 p board.render
