@@ -54,6 +54,12 @@ class Board
     end
   end
 
+  def won?
+    rows.all? do |row|
+      row.all?(&:revealed?)
+    end
+  end
+
   private
   
   attr_reader :grid
