@@ -65,11 +65,11 @@ class Board
   attr_reader :grid
 end
 
-board = Board.new
-board.hide([1, 2])
-p board.reveal([1, 2])
-p board.reveal([3, 2])
-p board.reveal([3, 3])
-p board.reveal([3, 1])
-p board.reveal([3, 0])
-p board.render
+# board = Board.new
+# board.hide([1, 2])
+# p board.reveal([1, 2])
+# p board.reveal([3, 2])
+# p board.reveal([3, 3])
+# p board.reveal([3, 1])
+# p board.reveal([3, 0])
+# p board.render
