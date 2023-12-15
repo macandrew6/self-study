@@ -55,7 +55,7 @@ class Board
   end
 
   def won?
-    rows.all? do |row|
+    grid.all? do |row|
       row.all?(&:revealed?)
     end
   end
