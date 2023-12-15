@@ -25,6 +25,15 @@ class Game
       pos.count == 2 &&
       pos.all? (|x| x.between?(0, board.size - 1))
   end
+
+  def play
+    until board.won?
+      board.render
+      pos = get_player_input
+    end
+
+    'Puts congratulation you are the winner'
+  end
 end
 
 player1 = HumanPlayer.new
