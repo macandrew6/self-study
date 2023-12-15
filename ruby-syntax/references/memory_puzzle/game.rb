@@ -23,7 +23,7 @@ class Game
   def valid_pos?(pos)
     pos.is_a?(Array) &&
       pos.count == 2 &&
-      pos.all? (|x| x.between?(0, board.size - 1))
+      pos.all? {|x| x.between?(0, board.size - 1)}
   end
 
   def play
@@ -34,8 +34,13 @@ class Game
 
     'Puts congratulation you are the winner'
   end
+
+  private
+
+  attr_accessor :prev_guess
+  attr_reader :board
 end
 
 player1 = HumanPlayer.new
 memory = Game.new(player1)
-memory.get_player_input
+memory.play
