@@ -30,5 +30,3 @@ end
 player1 = HumanPlayer.new
 memory = Game.new(player1)
 memory.get_player_input
-
-p memory
