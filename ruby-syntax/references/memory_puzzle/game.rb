@@ -26,6 +26,10 @@ class Game
       pos.all? {|x| x.between?(0, board.size - 1)}
   end
 
+  def match?(pos1, pos2)
+    board[pos1] == board[pos2]
+  end
+
   def play
     until board.won?
       board.render
