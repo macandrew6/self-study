@@ -44,3 +44,8 @@ end
 player1 = HumanPlayer.new
 memory = Game.new(player1)
 memory.play
+
+if PROGRAM_NAME == __FILE__
+  size = ARGV.empty? ? 4 : ARGV.shift.to_i
+  Game.new(HumanPlayer.new(size), size).play
+end
