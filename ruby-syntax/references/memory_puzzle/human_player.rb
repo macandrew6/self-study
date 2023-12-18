@@ -16,4 +16,8 @@ class HumanPlayer
   def parse(string)
     string.split(',').map {|x| Integer(x)}
   end
+
+  def receive_revealed_card(_pos_1, _pos2)
+    # duck typing
+  end
 end

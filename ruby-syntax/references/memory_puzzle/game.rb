@@ -19,6 +19,10 @@ class Game
 
     pos
   end
+
+  def make_guess(pos)
+    reveal_value = board.reveal(pos)
+  end
   
   def valid_pos?(pos)
     pos.is_a?(Array) &&
@@ -47,5 +51,7 @@ end
 
 if PROGRAM_NAME == __FILE__
   size = ARGV.empty? ? 4 : ARGV.shift.to_i
-  Game.new(HumanPlayer.new(size), size).play
+  memory = Game.new(HumanPlayer.new(size), size)
+  memory.make_guess
+  # memory.play
 end
