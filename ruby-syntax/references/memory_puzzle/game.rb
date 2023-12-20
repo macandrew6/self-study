@@ -22,6 +22,8 @@ class Game
 
   def make_guess(pos)
     reveal_value = board.reveal(pos)
+    player.receive_revealed_card(pos, reveal_value)
+    board.render
   end
   
   def valid_pos?(pos)
@@ -49,9 +51,9 @@ class Game
   attr_reader :board
 end
 
-if PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
   size = ARGV.empty? ? 4 : ARGV.shift.to_i
   memory = Game.new(HumanPlayer.new(size), size)
-  memory.make_guess
+  memory.make_guess([0, 1])
   # memory.play
 end

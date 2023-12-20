@@ -1,5 +1,5 @@
 class HumanPlayer
-  def initialize
+  def initialize(_size)
     @prev_guess = nil
   end
 
