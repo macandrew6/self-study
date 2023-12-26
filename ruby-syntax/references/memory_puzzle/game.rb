@@ -20,6 +20,22 @@ class Game
     pos
   end
 
+  def compare_guess(new_guess)
+    if prev_guess
+      if match?(prev_guess, new_guess)
+        player.receive_match(prev_guess, new_guess)
+      else
+        puts "Try again"
+        [prev_guess, new_guess].each {|pos| board.hide(pos)}
+      end
+      self.prev_guess = nil
+      player.prev_guess = nil
+    else
+      self.prev_guess = new_guess
+      player.prev_guess = new_guess
+    end
+  end
+
   def make_guess(pos)
     reveal_value = board.reveal(pos)
     player.receive_revealed_card(pos, reveal_value)

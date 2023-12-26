@@ -17,7 +17,11 @@ class HumanPlayer
     string.split(',').map {|x| Integer(x)}
   end
 
-  def receive_revealed_card(_pos_1, _pos2)
+  def receive_revealed_card(pos, value)
     # duck typing
+  end
+
+  def receive_match(_pos1, _pos2)
+    puts "It's a match!"
   end
 end
