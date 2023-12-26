@@ -1,4 +1,6 @@
 class HumanPlayer
+  attr_accessor :prev_guess
+  
   def initialize(_size)
     @prev_guess = nil
   end
