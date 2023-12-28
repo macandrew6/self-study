@@ -61,6 +61,7 @@ class Game
     until board.won?
       board.render
       pos = get_player_input
+      make_guess(pos)
     end
 
     'Puts congratulation you are the winner'
@@ -75,9 +76,5 @@ end
 if $PROGRAM_NAME == __FILE__
   size = ARGV.empty? ? 4 : ARGV.shift.to_i
   memory = Game.new(HumanPlayer.new(size), size)
-  memory.make_guess([0, 0])
-  memory.make_guess([0, 1])
-  memory.make_guess([0, 2])
-  memory.make_guess([0, 3])
-  # memory.play
+  memory.play
 end
