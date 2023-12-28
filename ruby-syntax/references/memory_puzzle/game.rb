@@ -22,7 +22,7 @@ class Game
 
   def compare_guess(new_guess)
     if prev_guess
-      if match?(prev_guess, new_guess)
+      if match?(prev_guess, new_guess) && (prev_guess != new_guess)
         player.receive_match(prev_guess, new_guess)
       else
         puts "Try again"
@@ -64,7 +64,7 @@ class Game
       make_guess(pos)
     end
 
-    'Puts congratulation you are the winner'
+    puts "Congratulation you are the winner"
   end
 
   private
