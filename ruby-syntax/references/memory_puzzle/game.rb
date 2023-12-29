@@ -22,6 +22,7 @@ class Game
 
   def compare_guess(new_guess)
     if prev_guess
+      # bug here in choosing an already opened card
       if match?(prev_guess, new_guess) && (prev_guess != new_guess)
         player.receive_match(prev_guess, new_guess)
       else
